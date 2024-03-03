@@ -1,11 +1,20 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import { loadPromoBanner } from '@/pages/api/promoBanner';
 import Layout from '@/shared/Layout';
-import Promo from "@/widgets/Promo";
+import Promo from '@/widgets/Promo';
+import {useDispatch} from "react-redux";
+import {setPromoBanner} from "@/slices/promoBannerSlice";
 
 const Home = (props) => {
-  const { initialPosts, total } = props;
+  const { promoBanner } = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPromoBanner(promoBanner));
+  }, [dispatch, promoBanner]);
+
   return (
     <>
       <Head>
@@ -22,6 +31,15 @@ const Home = (props) => {
       </Layout>
     </>
   );
+};
+
+export const getServerSideProps = async () => {
+  const { loadedPromoBanner } = await loadPromoBanner();
+  return {
+    props: {
+      promoBanner: loadedPromoBanner,
+    },
+  };
 };
 
 export default Home;

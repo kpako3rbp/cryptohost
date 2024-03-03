@@ -5,6 +5,8 @@
   z-index: 5;
   width: 100%;
 
+  transition: var(--transition);
+
   &Scrolled {
     background-color: var(--gray-color);
     border-bottom: var(--border-black);
@@ -52,6 +54,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    transition: var(--transition);
   }
 
   &Button {

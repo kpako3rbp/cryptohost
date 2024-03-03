@@ -31,7 +31,7 @@ export default {
       name: 'description',
       type: 'text',
       title: '📃 Описание (коротко)',
-      validation: (Rule) => Rule.required().max(80),
+      validation: (Rule) => Rule.required().max(100),
       group: 'content',
     },
     {

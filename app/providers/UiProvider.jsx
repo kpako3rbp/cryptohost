@@ -1,16 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 const UiProvider = (props) => {
-  const {children} = props;
+  const { children } = props;
 
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen] = useState(true);
 
   return (
-    <UiProvider.Provider value={{ menuOpen, setLightTheme, setDarkTheme, themes }}>
-      {children}
-    </UiProvider.Provider>
+    <UiProvider.Provider value={{ menuOpen }}>{children}</UiProvider.Provider>
   );
-
 };
 
 export default UiProvider;

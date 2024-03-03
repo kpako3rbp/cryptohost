@@ -1,25 +1,32 @@
 import cl from 'classnames';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ButtonLink from '@/shared/ButtonLink';
 import PixelizedImage from '@/shared/PixelizedImg';
 import Section from '@/shared/Section';
 import Title from '@/shared/Title';
+// import {urlFor} from "@/lib/client";
 
 import styles from './index.module.scss';
 
 const Promo = (props) => {
   const { children, className } = props;
+  const data = useSelector((state) => state.promoBanner.data);
+  const { title, description, image, slug, url } = data || {};
+
+  console.log(image)
+
   return (
     <Section className={styles.promo}>
       <div className={styles.promoWrapper}>
         <div className={styles.promoText}>
           <Title className={styles.promoTitle} type={'main'}>
-            Ежемесячный дроп мем-коинов
+            {title}
           </Title>
-          <p className={styles.promoDescr}>Месяц до Нового Года - это отличный повод раздать немного мемасов!</p>
-          <ButtonLink href={'/'} color={'green'} className={styles.promoButton}>
+          <p className={styles.promoDescr}>{description}</p>
+          <ButtonLink href={slug ?? url ?? '/'} color={'green'} className={styles.promoButton}>
             Подробности
           </ButtonLink>
         </div>
