@@ -1,0 +1,68 @@
+.rate {
+  font-size: 18px;
+  padding: 10px 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &Data {
+    margin-left: 25px;
+  }
+
+  &Img {
+    filter: drop-shadow(3px 3px 0px var(--black-color));
+  }
+
+
+  &Wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+    margin-top: 5px;
+  }
+
+  &PercentGreen, &PercentPink {
+    font-size: 14px;
+    margin-left: 14px;
+  }
+
+  &PercentGreen {
+    color: var(--green-color2);
+  }
+
+  &PercentPink {
+    color: var(--pink-color);
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1020px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: 780px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 576px) {
+  .rate {
+    font-size: 14px;
+    padding: 10px 20px;
+    &Img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

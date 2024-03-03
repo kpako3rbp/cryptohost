@@ -37,50 +37,37 @@
     object-fit: cover;
   }
 
-  &Decor {
+  &Ethereum {
     position: absolute;
     transition: 0s all;
 
-    &:nth-child(1) {
-      height: 88px;
-      width: 88px;
-      left: 245px;
-      top: -30px;
-      transition: none;
+    height: 88px;
+    width: 88px;
+    left: 245px;
+    top: -30px;
+  }
 
-      // background-image: url('/ethereum-01.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      animation: promo-decor-1 1.1s infinite;
-    }
+  &Bitcoin {
+    position: absolute;
+    transition: 0s all;
 
-    &:nth-child(2) {
-      height: 107px;
-      width: 107px;
-      left: -35px;
-      bottom: -55px;
-      top: auto;
+    height: 107px;
+    width: 107px;
+    left: -35px;
+    bottom: -55px;
+    top: auto;
+  }
 
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      animation: promo-decor-2 1.1s infinite;
-    }
+  &X {
+    position: absolute;
+    transition: 0s all;
 
-    &:nth-child(3) {
-      height: 47px;
-      width: 47px;
-      left: auto;
-      right: 5px;
-      top: auto;
-      bottom: -95px;
-
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      animation: promo-decor-3 1.1s infinite;
-    }
+    height: 47px;
+    width: 47px;
+    left: auto;
+    right: 5px;
+    top: auto;
+    bottom: -95px;
   }
 
   &Descr {
@@ -109,21 +96,16 @@
       height: auto;
     }
 
-    &Decor {
-      position: absolute;
-      transition: 0s all;
-
-      &:nth-child(1) {
-        height: 88px;
-        width: 88px;
-        left: 216px;
-        top: -71px;
-      }
+    &Ethereum {
+      height: 88px;
+      width: 88px;
+      left: 216px;
+      top: -71px;
     }
   }
 }
 
-@media (max-width: 992px) {
+/*@media (max-width: 992px) {
   .promo {
     &Title {
       font-size: 64px;
@@ -149,7 +131,7 @@
       }
     }
   }
-}
+}*/
 
 
 @media (max-width: 992px) {
@@ -159,16 +141,20 @@
       font-size: 50px;
     }
 
-    &Decor {
-      position: absolute;
-      transition: 0s all;
+    &Wrapper {
+      grid-template-columns: 100%;
+    }
 
-      &:nth-child(1) {
-        height: 88px;
-        width: 88px;
-        left: 416px;
-        top: -110px;
-      }
+    &ImageWrapper {
+      width: 100%;
+      height: auto;
+    }
+
+    &Ethereum {
+      height: 88px;
+      width: 88px;
+      left: 416px;
+      top: -110px;
     }
   }
 }
@@ -182,15 +168,21 @@
       line-height: 2.5rem;
     }
 
-    &Decor {
+    &Ethereum {
       scale: .7;
 
-      &:nth-child(1) {
-        height: 88px;
-        width: 88px;
-        left: 282px;
-        top: -51px;
-      }
+      height: 88px;
+      width: 88px;
+      left: 282px;
+      top: -51px;
+    }
+
+    &Bitcoin {
+      scale: .7;
+    }
+
+    &X {
+      scale: .7;
     }
   }
 }

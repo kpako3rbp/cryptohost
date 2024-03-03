@@ -6,6 +6,7 @@ import Layout from '@/shared/Layout';
 import Promo from '@/widgets/Promo';
 import {useDispatch} from "react-redux";
 import {setPromoBanner} from "@/slices/promoBannerSlice";
+import CurrencyRates from "@/widgets/CurrencyRates";
 
 const Home = (props) => {
   const { promoBanner } = props;
@@ -27,7 +28,8 @@ const Home = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Promo></Promo>
+        <Promo />
+        <CurrencyRates />
       </Layout>
     </>
   );

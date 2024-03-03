@@ -1,0 +1,9 @@
+.card {
+  border-radius: var(--br);
+  border: var(--border-black);
+  background-image: linear-gradient(var(--gray-color) 1px, transparent 1px), linear-gradient(to right, var(--gray-color) 1px, transparent 1px);
+  box-shadow: var(--box-shadow-sm);
+  background-size: 30px 30px;
+  background-color: var(--background-color);
+}
+

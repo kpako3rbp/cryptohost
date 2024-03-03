@@ -7,9 +7,14 @@ import Pixelit from '@/shared/lib/pixelit';
 import styles from './index.module.scss';
 
 const PixelizedImage = (props) => {
-  const { children, className, src, alt } = props;
-
+  const { className, src, alt } = props;
   const imageRef = useRef();
+
+  useEffect(() => {
+    if (src && imageRef.current.complete) {
+      pixelizeImg(imageRef.current);
+    }
+  }, [src]);
 
   const pixelizeImg = (img) => {
     const px = new Pixelit({
@@ -24,13 +29,9 @@ const PixelizedImage = (props) => {
     }, 800);
   };
 
-  useEffect(() => {
-    pixelizeImg(imageRef.current);
-  }, []);
-
   return (
     <div>
-      <img ref={imageRef} src={src} alt={alt} className={className}></img>
+      <img ref={imageRef} src={src} alt={alt} className={className} onLoad={() => pixelizeImg(imageRef.current)} />
       <canvas data-pixelit={''} className={cl(className, styles.imageBordered)}></canvas>
     </div>
   );
