@@ -8,6 +8,12 @@
   &Scrolled {
     background-color: var(--gray-color);
     border-bottom: var(--border-black);
+
+    .header {
+      &Inner {
+        padding: 15px 0;
+      }
+    }
   }
 
   &Logo {

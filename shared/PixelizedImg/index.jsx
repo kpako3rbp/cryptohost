@@ -26,18 +26,10 @@ const PixelizedImage = (props) => {
     pixelizeImg(imageRef.current);
   }, [imageRef.current]);
 
-  if (hasBorder) {
-    return (
-      <div>
-        <img ref={imageRef} src={src} alt={alt} className={className} />
-        <canvas data-pixelit={''} className={cl(className, styles.imageBordered)}></canvas>
-      </div>
-    );
-  }
   return (
     <div>
-      <img ref={imageRef} src={src} alt={alt} />
-      <canvas data-pixelit={''} className={cl(className)}></canvas>
+      <img ref={imageRef} src={src} alt={alt} className={className} />
+      <canvas data-pixelit={''} className={cl(className, styles.imageBordered)}></canvas>
     </div>
   );
 };

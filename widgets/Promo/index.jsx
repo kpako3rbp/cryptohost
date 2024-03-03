@@ -24,9 +24,9 @@ const Promo = (props) => {
           </ButtonLink>
         </div>
         <div className={styles.promoImageWrapper}>
-          <div src={'/ethereum-01.png'} alt={'eth'} className={styles.promoDecor} hasBorder={false} />
-          <div src={'/bitcoin-01.png'} alt={'btc'} className={styles.promoDecor} hasBorder={false} />
-          <div src={'/x.png'} alt={'x'} className={styles.promoDecor} hasBorder={false} />
+          <div src={'/ethereum-01.png'} alt={'eth'} className={styles.promoDecor} />
+          <div src={'/bitcoin-01.png'} alt={'btc'} className={styles.promoDecor} />
+          <div src={'/x.png'} alt={'x'} className={styles.promoDecor} />
           <PixelizedImage src={'/promo.jpg'} alt="" className={styles.promoImage} />
         </div>
       </div>

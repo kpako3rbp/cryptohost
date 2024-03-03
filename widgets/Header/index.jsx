@@ -27,6 +27,7 @@ const Header = (props) => {
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
 
     return () => {

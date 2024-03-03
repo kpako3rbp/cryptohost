@@ -13,7 +13,6 @@ const Window = (props) => {
   const { children, className, header, isOpen } = props;
   const dispatch = useDispatch();
 
-
   const windowOverlayClassName = cl({
     [styles.overlay]: isOpen,
   });
@@ -23,14 +22,16 @@ const Window = (props) => {
 
   return (
     <div className={windowOverlayClassName}>
-      <div className={windowClassName}>
-        <div className={styles.windowHeader}>
-          {header}
-          <ToolButton onClick={() => dispatch(closeModal())}>
-            <IoClose />
-          </ToolButton>
+      <div className={styles.overlayInner}>
+        <div className={windowClassName}>
+          <div className={styles.windowHeader}>
+            {header}
+            <ToolButton onClick={() => dispatch(closeModal())}>
+              <IoClose />
+            </ToolButton>
+          </div>
+          <div className={styles.windowInner}>{children}</div>
         </div>
-        <div className={styles.windowInner}>{children}</div>
       </div>
     </div>
   );
