@@ -1,13 +1,18 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
 
-export default function Document() {
+const Document = () => {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <meta name="format-detection" content="telephone=no" />
+      </Head>
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
   );
-}
+};
+
+export default Document;

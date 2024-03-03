@@ -1,0 +1,30 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  &Button {
+    margin-top: var(--mt-30);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+  }
+
+  &Nav {
+    ul {
+      li {
+        padding: 20px 0;
+      }
+    }
+  }
+
+  &Name {
+    font-size: 2rem;
+    border-bottom: var(--border-black);
+  }
+}
+
+
+
+

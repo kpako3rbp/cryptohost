@@ -1,0 +1,26 @@
+.button {
+  border: 2px solid var(--black-color);
+  border-radius: var(--br-small);
+  box-shadow: var(--box-shadow-xsm);
+  padding: 5px;
+  font-size: var(--fz-15);
+  cursor: pointer;
+
+  color: var(--black-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--background-color);
+
+  svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  &:hover {
+    transform: translate(1px, 1px);
+    box-shadow: var(--box-shadow-xsm-hover);
+  }
+}

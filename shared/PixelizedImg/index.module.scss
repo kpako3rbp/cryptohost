@@ -1,0 +1,7 @@
+.image {
+  &Bordered {
+    border: var(--border-black);
+    box-shadow: var(--box-shadow-sm);
+    border-radius: var(--br);
+  }
+}

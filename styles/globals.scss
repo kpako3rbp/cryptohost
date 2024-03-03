@@ -1,0 +1,128 @@
+@font-face {
+  font-family: 'Monocraft';
+  src: url('/fonts/Monocraft.eot');
+  src: local('Monocraft'), local('Monocraft'),
+  url('/Monocraft.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Monocraft.otf') format('woff'),
+  url('/fonts/Monocraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --max-width: 1200px;
+  --br-small: 5px;
+  --br: 10px;
+
+  --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
+  --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
+
+  --box-shadow-sm: 3px 3px 0px 0px var(--black-color);
+  --box-shadow-sm-hover: 1px 1px 0px 0px var(--black-color);
+  --transition: .1s all;
+
+  --border-black: 2px solid var(--black-color);
+
+  --mt-10: 10px;
+  --mt-15: 15px;
+  --mt-20: 20px;
+  --mt-25: 25px;
+  --mt-30: 30px;
+  --mt-35: 35px;
+  --mt-40: 40px;
+  --mt-45: 45px;
+  --mt-50: 50px;
+  --mt-55: 55px;
+
+  --fz-15: 15px;
+  --fz-18: 18px;
+  --fz-30: 18px;
+
+
+  // Depends of color theme
+  --background-color: #efe9db;
+  --overlay-color: rgba(108, 106, 102, 0.92);
+  --black-color: #414042;
+  --green-color: #85e17e;
+  --blue-color: #82c0d5;
+  --gray-color: #ddd8cc;
+  --purple-color: #5f3bc2;
+  --white-color: #ffffff;
+  --text-color-gray: #7b7583;
+  --text-color-dark: #3b3347;
+  --text-color-medium: #7b7583;
+  --green-color2: #3c9336;
+  --pink-color: #ed0265;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #2c2b2a;
+    --black-color: #dddddd;
+    --green-color: #75a65e;
+    --blue-color: #549fbf;
+    --gray-color: #a8a39e;
+    --purple-color: #836bb3;
+    --white-color: #333333;
+    --text-color-gray: #bcb5be;
+    --text-color-dark: #a3a0a4;
+    --text-color-medium: #bcb5be;
+    --green-color2: #1f6021;
+    --pink-color: #aa024a;
+  }
+}
+
+.dark-theme {
+  :root {
+    --background-color: #2c2b2a;
+    --black-color: #dddddd;
+    --green-color: #75a65e;
+    --blue-color: #549fbf;
+    --gray-color: #a8a39e;
+    --purple-color: #836bb3;
+    --white-color: #333333;
+    --text-color-gray: #bcb5be;
+    --text-color-dark: #a3a0a4;
+    --text-color-medium: #bcb5be;
+    --green-color2: #1f6021;
+    --pink-color: #aa024a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Monocraft', sans-serif;
+  color: var(--black-color);
+}
+
+body {
+  background-color: var(--background-color);
+  overflow-x: hidden;
+}
+
+html,
+body,
+button {
+  font-family: 'Monocraft', sans-serif;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  transition: var(--transition);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

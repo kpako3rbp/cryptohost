@@ -1,5 +1,19 @@
-import "@/styles/globals.css";
+import '@/styles/reset.scss';
+import '@/styles/globals.scss';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+import React from 'react';
+import { Provider } from 'react-redux';
+
+import store from '@/slices';
+
+const App = (props) => {
+  const { Component, pageProps } = props;
+
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
+};
+
+export default App;

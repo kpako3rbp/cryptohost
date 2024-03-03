@@ -1,0 +1,11 @@
+.nav {
+  ul {
+    font-size: 18px;
+  }
+
+  &Active {
+    a {
+      color: var(--purple-color);
+    }
+  }
+}
