@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { loadPromoBanner } from '@/pages/api/promoBanner';
 import Layout from '@/shared/Layout';
+import { setPromoBanner } from '@/slices/promoBannerSlice';
+import CurrencyRates from '@/widgets/CurrencyRates';
 import Promo from '@/widgets/Promo';
-import {useDispatch} from "react-redux";
-import {setPromoBanner} from "@/slices/promoBannerSlice";
-import CurrencyRates from "@/widgets/CurrencyRates";
 
 const Home = (props) => {
   const { promoBanner } = props;
