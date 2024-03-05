@@ -1,14 +1,15 @@
 import cl from 'classnames';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Pixelit from '@/shared/lib/pixelit';
 
 import styles from './index.module.scss';
 
 const PixelizedImage = (props) => {
-  const { className, src, alt } = props;
+  const { className, src, alt, pixelScale } = props;
   const imageRef = useRef();
+  const canvasRef = useRef();
 
   useEffect(() => {
     if (src && imageRef.current.complete) {
@@ -19,22 +20,24 @@ const PixelizedImage = (props) => {
   const pixelizeImg = (img) => {
     const px = new Pixelit({
       from: img,
+      to: canvasRef.current,
     });
-    let scale = 7; // Начальный масштаб
+    let scale = pixelScale; // Начальный масштаб
     px.setScale(scale).pixelate();
 
     setInterval(() => {
-      scale = scale === 7 ? 6 : 7;
+      scale = scale === pixelScale ? pixelScale - 1 : pixelScale;
       px.setScale(scale).pixelate();
     }, 800);
   };
 
   return (
-    <div>
-      <img ref={imageRef} src={src} alt={alt} className={className} onLoad={() => pixelizeImg(imageRef.current)} />
-      <canvas data-pixelit={''} className={cl(className, styles.imageBordered)}></canvas>
+    <div className={cl(styles.image, className)}>
+      <img ref={imageRef} src={src} alt={alt} onLoad={() => pixelizeImg(imageRef.current)} />
+      <canvas ref={canvasRef} ></canvas>
     </div>
   );
 };
 
 export default PixelizedImage;
+

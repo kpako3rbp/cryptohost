@@ -23,7 +23,7 @@ const CurrencyRates = (props) => {
       const currentTime = new Date();
       const hours = currentTime.getHours().toString().padStart(2, '0');
       const minutes = currentTime.getMinutes().toString().padStart(2, '0');
-      const formattedTime = `${hours} : ${minutes}`;
+      const formattedTime = { hours, minutes };
 
       dispatch(updateResponseTime(formattedTime));
 
@@ -57,8 +57,13 @@ const CurrencyRates = (props) => {
 
   return (
     rates && (
-      <Section className={cl(className, styles.rates)}>
-        {hasTitle && <h3 className={styles.ratesTitle}>Курсы криптовалют / обновлено {`${updateTime}`}</h3>}
+      <div className={cl(className, styles.rates)}>
+        {hasTitle && (
+          <h3 className={styles.ratesTitle}>
+            Курсы криптовалют / обновлено {updateTime.hours} <span className={styles.ratesDots}>:</span>{' '}
+            {updateTime.minutes}
+          </h3>
+        )}
         <GriddedCard className={styles.ratesCard}>
           <Slider {...sliderSettings}>
             {rates.map((rate) => (
@@ -66,7 +71,7 @@ const CurrencyRates = (props) => {
             ))}
           </Slider>
         </GriddedCard>
-      </Section>
+      </div>
     )
   );
 };

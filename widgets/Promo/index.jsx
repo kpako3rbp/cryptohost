@@ -24,7 +24,7 @@ const Promo = (props) => {
   }
 
   return (
-    <Section className={styles.promo}>
+    <div className={styles.promo}>
       <div className={styles.promoWrapper}>
         <div className={styles.promoText}>
           <Title className={styles.promoTitle} type={'main'}>
@@ -39,10 +39,10 @@ const Promo = (props) => {
           <EthereumImage className={styles.promoEthereum} />
           <BitcoinImage className={styles.promoBitcoin} />
           <XImage className={styles.promoX} />
-          {image && <PixelizedImage src={urlFor(image).url()} alt="" className={styles.promoImage} />}
+          {image && <PixelizedImage src={urlFor(image).url()} alt="" className={styles.promoImage} pixelScale={13} />}
         </div>
       </div>
-    </Section>
+    </div>
   );
 };
 

@@ -3,9 +3,9 @@ import React from 'react';
 
 import styles from './index.module.scss';
 
-const X = (props) => {
+const PostGrid = (props) => {
   const { children, className } = props;
-  return <div></div>;
+  return <div className={cl(className, styles.postGrid)}>{children}</div>;
 };
 
-export default X;
+export default PostGrid;

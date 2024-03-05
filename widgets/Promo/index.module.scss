@@ -1,7 +1,7 @@
 @import '@/styles/animation.scss';
 
 .promo {
-  padding: 70px 0;
+  // padding: 70px 0;
   &Title {
     font-size: 69px;
     color: var(--white-color);
@@ -38,6 +38,7 @@
   }
 
   &Ethereum {
+    z-index: 2;
     position: absolute;
     transition: 0s all;
 
@@ -48,6 +49,7 @@
   }
 
   &Bitcoin {
+    z-index: 2;
     position: absolute;
     transition: 0s all;
 
@@ -59,6 +61,7 @@
   }
 
   &X {
+    z-index: 2;
     position: absolute;
     transition: 0s all;
 
@@ -136,7 +139,7 @@
 
 @media (max-width: 992px) {
   .promo {
-    padding: 40px 0;
+    //padding: 40px 0;
     &Title {
       font-size: 50px;
     }
@@ -164,8 +167,8 @@
     // padding: 25px 0;
 
     &Title {
-      font-size: 10vw;
-      line-height: 2.5rem;
+      font-size: 11vw;
+      line-height: 1;
     }
 
     &Ethereum {
@@ -183,6 +186,15 @@
 
     &X {
       scale: .7;
+      bottom: -65px;
+    }
+
+    &Descr {
+      font-size: 17px;
+    }
+
+    &Button {
+      margin-top: 30px;
     }
   }
 }

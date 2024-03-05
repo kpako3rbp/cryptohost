@@ -2,18 +2,35 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import MainPost from '@/entities/MainPost';
+import Post from '@/entities/Post';
+import { loadPosts } from '@/pages/api/posts';
 import { loadPromoBanner } from '@/pages/api/promoBanner';
 import Layout from '@/shared/Layout';
+import PostGrid from '@/shared/PostGrid';
+import Section from '@/shared/Section';
+import Title from '@/shared/Title';
+import { setPosts } from '@/slices/postsSlice';
 import { setPromoBanner } from '@/slices/promoBannerSlice';
 import CurrencyRates from '@/widgets/CurrencyRates';
 import Promo from '@/widgets/Promo';
 
+const LOAD_MORE_STEP = 6;
+
 const Home = (props) => {
-  const { promoBanner } = props;
+  const { promoBanner, initialPosts, total } = props;
+  const [loadedPosts, setLoadedPosts] = useState(initialPosts);
+  const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP);
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setPromoBanner(promoBanner));
+  }, [dispatch, promoBanner]);
+
+  useEffect(() => {
+    dispatch(setPosts({ posts: initialPosts, total }));
   }, [dispatch, promoBanner]);
 
   return (
@@ -28,8 +45,21 @@ const Home = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Promo />
-        <CurrencyRates />
+        <Section>
+          <Promo />
+        </Section>
+        <Section>
+          <CurrencyRates />
+        </Section>
+        <Section>
+          <Title>Текущие новости</Title>
+          <PostGrid>
+            <MainPost {...loadedPosts[0]} />
+            {loadedPosts.slice(1).map((post) => (
+              <Post key={post.slug.current} {...post} />
+            ))}
+          </PostGrid>
+        </Section>
       </Layout>
     </>
   );
@@ -37,9 +67,12 @@ const Home = (props) => {
 
 export const getServerSideProps = async () => {
   const { loadedPromoBanner } = await loadPromoBanner();
+  const { loadedPosts, total } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост
   return {
     props: {
       promoBanner: loadedPromoBanner,
+      initialPosts: loadedPosts,
+      total,
     },
   };
 };

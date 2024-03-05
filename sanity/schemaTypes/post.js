@@ -1,11 +1,11 @@
-import {transliterate} from 'transliteration';
+import {transliterate} from 'transliteration'
 
 const textEditorStyles = [
-  { title: 'Обычный текст', value: 'p' },
-  { title: 'Заголовок большой', value: 'h2' },
-  { title: 'Заголовок маленький', value: 'h3' },
-  { title: 'Цитата', value: 'blockquote' },
-];
+  {title: 'Обычный текст', value: 'p'},
+  {title: 'Заголовок большой', value: 'h2'},
+  {title: 'Заголовок маленький', value: 'h3'},
+  {title: 'Цитата', value: 'blockquote'},
+]
 
 export default {
   name: 'post',
@@ -40,8 +40,8 @@ export default {
       name: 'category',
       title: '📋 Категория',
       type: 'reference',
-      to: [{ type: 'category' }], // Ссылка на схему категорий
-      validation: Rule => Rule.required(),
+      to: [{type: 'category'}], // Ссылка на схему категорий
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'publishedDate',
@@ -56,7 +56,7 @@ export default {
         calendarTodayLabel: 'Today',
       },
     },
-    {
+    /*    {
       name: 'image',
       type: 'image',
       title: '🖼 Обложка новости',
@@ -69,17 +69,43 @@ export default {
           title: 'Название (например, banner)',
         },
       ],
+    },*/
+
+    {
+      name: 'image',
+      type: 'image',
+      title: '🖼 Обложка',
+      validation: (Rule) => Rule.required(),
+      group: 'content',
+      options: {
+        metadata: ['location', 'palette'],
+        storeOriginalFilename: false,
+        maxWidth: 500, // Устанавливаем максимальную ширину в 1920 пикселей
+      },
+      fields: [
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Название (например, banner)',
+        },
+      ],
     },
+
     {
       name: 'slug',
       type: 'slug',
       title: '🔗 Slug',
-      description: 'Slug - это короткое текстовое представление заголовка или имени, которое будет использоваться в URL новости. Сгенерируйте его.',
+      description:
+        'Slug - это короткое текстовое представление заголовка или имени, которое будет использоваться в URL новости. Сгенерируйте его.',
       group: 'content',
       options: {
         source: 'title',
         maxLength: 200, // will be ignored if slugify is set
-        slugify: (input) => transliterate(input.replace(/[^a-zA-Zа-яА-Я\s]/g, '')).toLowerCase().replace(/\s+/g, '-').slice(0, 200),
+        slugify: (input) =>
+          transliterate(input.replace(/[^a-zA-Zа-яА-Я\s]/g, ''))
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .slice(0, 200),
       },
     },
     {
@@ -98,4 +124,4 @@ export default {
       ],
     },
   ],
-};
+}

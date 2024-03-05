@@ -3,8 +3,23 @@
   display: inline-block;
 
   &Small {
+    font-size: 22px;
   }
 
   &Medium {
+    font-size: 54px;
   }
 }
+
+@media (max-width: 576px) {
+  .title {
+    &Small {
+      font-size: 20px;
+    }
+
+    &Medium {
+      font-size: 35px;
+    }
+  }
+}
+

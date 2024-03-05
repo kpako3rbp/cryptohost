@@ -36,8 +36,9 @@
 
   --fz-14: 14px;
   --fz-15: 15px;
+  --fz-16: 16px;
   --fz-18: 18px;
-  --fz-30: 18px;
+  --fz-30: 30px;
 
 
   // Depends of color theme
@@ -125,5 +126,26 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --mt-10: 8px;
+    --mt-15: 12px;
+    --mt-20: 16px;
+    --mt-25: 21px;
+    --mt-30: 28px;
+    --mt-35: 32px;
+    --mt-40: 36px;
+    --mt-45: 41px;
+    --mt-50: 46px;
+    --mt-55: 51px;
+
+    --fz-14: 14px;
+    --fz-15: 15px;
+    --fz-16: 15px;
+    --fz-18: 15px;
+    --fz-30: 28px;
   }
 }
