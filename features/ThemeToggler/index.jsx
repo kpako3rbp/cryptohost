@@ -1,18 +1,19 @@
-import cl from 'classnames';
 import React from 'react';
 import { ImContrast } from 'react-icons/im';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@/shared/Button';
 import { toggleTheme } from '@/slices/themeSlice';
 
 import styles from './index.module.scss';
 
-const ThemeToggler = (props) => {
-  const { children, className } = props;
+const ThemeToggler = () => {
+  const theme = useSelector((state) => state.theme);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
     dispatch(toggleTheme());
   };
 
