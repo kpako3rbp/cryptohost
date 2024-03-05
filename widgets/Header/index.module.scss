@@ -65,21 +65,7 @@
   }
 
   &Burger {
-    padding: 10px;
     display: none;
-
-    box-shadow: var(--box-shadow-xsm);
-    background-color: var(--gray-color);
-
-    color: var(--black-color);
-    &:hover {
-      transform: translate(1px, 1px);
-      box-shadow: var(--box-shadow-xsm-hover);
-    }
-
-    svg {
-      margin: 0;
-    }
   }
 }
 

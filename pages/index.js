@@ -15,6 +15,7 @@ import { setPosts } from '@/slices/postsSlice';
 import { setPromoBanner } from '@/slices/promoBannerSlice';
 import CurrencyRates from '@/widgets/CurrencyRates';
 import Promo from '@/widgets/Promo';
+import Subscribe from '@/widgets/Subscribe';
 
 const LOAD_MORE_STEP = 6;
 
@@ -59,9 +60,11 @@ const Home = (props) => {
             {loadedPosts.slice(1).map((post) => (
               <Post key={post.slug.current} {...post} />
             ))}
-
             <ButtonLink href={'/news'}>Ко всем новостям →</ButtonLink>
           </PostGrid>
+        </Section>
+        <Section>
+          <Subscribe />
         </Section>
       </Layout>
     </>

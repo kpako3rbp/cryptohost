@@ -42,12 +42,12 @@ const CurrencyRates = (props) => {
     dots: false,
     arrows: false,
     infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    //slidesToShow: 1,
+    //slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 0, // Установите скорость автопрокрутки на 0
+    autoplaySpeed: 1, // Установите скорость автопрокрутки на 0
     speed: 5000, // Установите скорость прокрутки здесь
-    pauseOnHover: true,
+    // pauseOnHover: true,
     cssEase: 'linear', // Используйте linear для плавной прокрутки
     variableWidth: true, // Включите переменную ширину слайдов
     centerMode: true, // Включите центральный режим, чтобы текущий слайд был в центре

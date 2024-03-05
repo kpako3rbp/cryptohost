@@ -1,0 +1,140 @@
+.subscribeCard {
+  padding: 80px 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  // overflow: hidden;
+
+  &Button {
+    width: fit-content;
+  }
+
+  &Title {
+    padding: 40px 0;
+    width: 60%;
+  }
+
+  &Logo {
+    font-size: 57px;
+    font-weight: normal;
+  }
+
+  &Bitcoin {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 322px;
+    top: 49px;
+  }
+
+  &Telegram{
+    position: absolute;
+    right: 88px;
+    top: 124px;
+    width: 211px;
+    height: 218px;
+  }
+
+  &X {
+    position: absolute;
+    left: 520px;
+    bottom: 44px;
+    width: 41px;
+    height: 41px;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .subscribeCard {
+    &Bitcoin {
+      right: 261px;
+      top: 20px
+    }
+    &Telegram {
+      right: 53px;
+    }
+    &X {
+      left: 468px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .subscribeCard {
+    &Bitcoin {
+      right: 210px;
+      top: -71px;
+    }
+    &Telegram {
+      right: 38px;
+      top: 130px;
+    }
+    &X {
+      left: 385px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .subscribeCard {
+    padding: 50px 40px;
+
+    &Title {
+      width: 70%;
+      position: relative;
+      z-index: 1;
+    }
+
+    &Bitcoin {
+     display: none;
+    }
+    &Logo {
+      font-size: 7vw;
+    }
+    &Telegram {
+      right: -35px;
+      top: 115px;
+    }
+    &X {
+      left: 314px;
+      bottom: 19px;
+    }
+  }
+}
+
+
+@media (max-width: 576px) {
+  .subscribeCard {
+    padding: 35px 20px;
+
+    &Button {
+      z-index: 1;
+      width: 100%;
+    }
+
+    &Title {
+      width: 100%;
+      padding: 25px 0;
+      font-size: 17px;
+      position: relative;
+      z-index: 1;
+    }
+
+    &Logo {
+      font-size: 6.5vw;
+    }
+
+    &Telegram {
+      right: -24px;
+      top: -12px;
+      width: 80px;
+      height: 80px;
+    }
+
+    &X {
+      display: none;
+    }
+  }
+}

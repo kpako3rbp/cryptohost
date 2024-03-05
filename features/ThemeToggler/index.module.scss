@@ -1,0 +1,14 @@
+.themeToggler {
+  position: fixed;
+  left: 15px;
+  bottom: 15px;
+  padding: 10px;
+  background-color: var(--gray-color);
+  z-index: 3;
+  box-shadow: var(--box-shadow-xsm);
+
+   svg {
+     margin: 0;
+     // fill: var(--white-color);
+   }
+}

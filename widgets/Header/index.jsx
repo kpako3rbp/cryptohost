@@ -10,6 +10,7 @@ import Container from '@/shared/Container';
 import Logo from '@/shared/Logo';
 import Navigation from '@/shared/Navigation';
 import { openModal } from '@/slices/modalSlice';
+import ButtonLink from "@/shared/ButtonLink";
 
 import styles from './index.module.scss';
 
@@ -49,11 +50,11 @@ const Header = (props) => {
             <Logo descriptor={true} className={styles.headerLogo}></Logo>
           </Link>
           <Navigation className={styles.headerNavigation} />
-          <Button color={'green'} className={styles.headerButton}>
+          <ButtonLink href={'https://t.me/kpako3rbp'} color={'green'} className={styles.headerButton}>
             <FaTelegramPlane /> Подпишись!
-          </Button>
+          </ButtonLink>
 
-          <Button className={styles.headerBurger} onClick={() => dispatch(openModal())}>
+          <Button className={styles.headerBurger} tool={true} color={'gray'} onClick={() => dispatch(openModal())}>
             <IoMenu />
           </Button>
         </div>

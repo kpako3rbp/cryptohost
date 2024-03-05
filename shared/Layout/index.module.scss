@@ -2,6 +2,13 @@
   width: 100%;
   height: 100%;
   position: relative;
+  // overflow-x: hidden;
+
+  background-color: var(--background-color);
+
+  &Main {
+    overflow-x: hidden;
+  }
 
   &Fixed {
     position: fixed;
@@ -9,5 +16,29 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
+
+  &DarkTheme {
+    --background-color: #161617;
+    --overlay-color: rgba(23, 21, 21, 0.92);
+    --black-color: rgba(215, 210, 202, 0.92);
+    --green-color: #2f7e2d;
+    --blue-color: #1d6580;
+    --gray-color: #2a2729;
+    --purple-color: #7765bd;
+    --white-color: #3a3934;
+    --text-color-gray: #a09c9f;
+    --text-color-dark: #8c8c8c;
+    --text-color-medium: #cbc6ba;
+    --green-color2: #70c272;
+    --pink-color: #ed0265;
+
+    --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
+    --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
+
+    --box-shadow-sm: 3px 3px 0px 0px var(--black-color);
+    --box-shadow-sm-hover: 1px 1px 0px 0px var(--black-color);
+
+    --border-black: 2px solid var(--black-color);
   }
 }

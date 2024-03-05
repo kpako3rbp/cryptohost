@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './index.module.scss';
 
-const Navigation = (props) => {
+const Logo = (props) => {
   const { className, descriptor } = props;
 
   return (
@@ -16,4 +16,4 @@ const Navigation = (props) => {
   );
 };
 
-export default Navigation;
+export default Logo;

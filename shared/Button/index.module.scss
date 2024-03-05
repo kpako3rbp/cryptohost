@@ -20,12 +20,31 @@
 
   }
 
+  &Tool {
+    box-shadow: var(--box-shadow-xsm);
+    padding: 10px;
+
+    color: var(--black-color);
+    &:hover {
+      transform: translate(1px, 1px);
+      box-shadow: var(--box-shadow-xsm-hover);
+    }
+
+    svg {
+      margin: 0;
+    }
+  }
+
   &Blue {
     background-color: var(--blue-color);
   }
 
   &Green {
     background-color: var(--green-color);
+  }
+
+  &Gray {
+    background-color: var(--gray-color);
   }
 
   &:hover {
