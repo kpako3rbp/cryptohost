@@ -6,6 +6,7 @@ import MainPost from '@/entities/MainPost';
 import Post from '@/entities/Post';
 import { loadPosts } from '@/pages/api/posts';
 import { loadPromoBanner } from '@/pages/api/promoBanner';
+import ButtonLink from '@/shared/ButtonLink';
 import Layout from '@/shared/Layout';
 import PostGrid from '@/shared/PostGrid';
 import Section from '@/shared/Section';
@@ -52,12 +53,14 @@ const Home = (props) => {
           <CurrencyRates />
         </Section>
         <Section>
-          <Title>Текущие новости</Title>
+          <Title color={'purple'}>Текущие новости</Title>
           <PostGrid>
             <MainPost {...loadedPosts[0]} />
             {loadedPosts.slice(1).map((post) => (
               <Post key={post.slug.current} {...post} />
             ))}
+
+            <ButtonLink href={'/news'}>Ко всем новостям →</ButtonLink>
           </PostGrid>
         </Section>
       </Layout>

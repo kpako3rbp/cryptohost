@@ -9,6 +9,10 @@
   &Medium {
     font-size: 54px;
   }
+
+  &Purple {
+    color: var(--purple-color);
+  }
 }
 
 @media (max-width: 576px) {

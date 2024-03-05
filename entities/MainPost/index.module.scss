@@ -4,12 +4,6 @@
   grid-template-columns: 60% 1fr;
   gap: 40px;
 
-  &:hover {
-    .postTitle {
-      text-decoration: underline;
-    }
-  }
-
   &Img {
     // width: 100%;
   }
@@ -27,6 +21,12 @@
   &Info {
     font-size: 14px;
     color: var(--text-color-gray);
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &Category {
@@ -37,6 +37,9 @@
     margin-top: 20px;
     transition: var(--transition);
 
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &Text {
@@ -44,6 +47,7 @@
     color: var(--text-color-gray);
     margin-top: 18px;
     font-size: var(--fz-16);
+    line-height: 1.2;
   }
 
   &Button {
@@ -61,10 +65,42 @@
   }
 }
 
+@media (max-width: 992px) {
+  .post {
+    grid-template-columns: 100%;
+    gap: 0;
+
+    &Inner {
+      margin-top: 30px;
+      padding: 0;
+    }
+
+    &Button {
+      display: none;
+    }
+
+    &Img {
+      padding-bottom: 50%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .post {
+    grid-template-columns: 100%;
+
+    div {
+      &:first-child {
+        grid-column: 1;
+      }
+    }
+  }
+}
+
 @media (max-width: 576px) {
   .post {
-    &:hover {
-      .postTitle {
+    &Title {
+      &:hover {
         text-decoration: none;
       }
     }
@@ -79,6 +115,14 @@
 
     &Img {
       padding-bottom: 50%;
+    }
+
+    &Info {
+      a {
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 }

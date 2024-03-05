@@ -1,7 +1,7 @@
 import cl from 'classnames';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { urlFor } from '@/lib/client';
 import ButtonLink from '@/shared/ButtonLink';
@@ -12,11 +12,30 @@ import Title from '@/shared/Title';
 import styles from './index.module.scss';
 
 const MainPost = (props) => {
-  const { className, index, title, category, publishedDate, image, slug, body } = props;
+  const { className, index, title, category, categorySlug, publishedDate, image, slug, body } = props;
   const date = format(new Date(publishedDate), 'dd MMM, yyyy');
 
+  const [maxCharacters, setMaxCharacters] = useState(400);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 1200 && window.innerWidth > 992) {
+        setMaxCharacters(200);
+      } else {
+        setMaxCharacters(400);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    // Убираем слушатель событий при размонтировании компонента
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Пустой массив зависимостей гарантирует, что этот эффект будет выполнен только при монтировании компонента
+
   // Создаем описание поста
-  const description = extractPostDescription(body, 400);
+  const description = extractPostDescription(body, maxCharacters);
 
   return (
     title && (
@@ -27,7 +46,10 @@ const MainPost = (props) => {
         <div className={styles.postInner}>
           <div>
             <div className={styles.postInfo}>
-              <span className={styles.postCategory}>{category}</span> / {date}
+              <Link className={styles.postCategory} href={`/${encodeURIComponent(categorySlug.current)}`}>
+                {category}
+              </Link>{' '}
+              / {date}
             </div>
             <Link href={`post/${encodeURIComponent(slug.current)}`}>
               <Title type={'small'} className={styles.postTitle}>

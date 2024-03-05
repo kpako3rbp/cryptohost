@@ -1,12 +1,6 @@
 .post {
   width: 100%;
 
-  &:hover {
-    .postTitle {
-      text-decoration: underline;
-    }
-  }
-
   &Img {
     // width: 100%;
   }
@@ -24,6 +18,12 @@
   &Info {
     font-size: 14px;
     color: var(--text-color-gray);
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &Category {
@@ -34,6 +34,9 @@
     margin-top: 20px;
     transition: var(--transition);
 
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &Text {
@@ -41,6 +44,7 @@
     color: var(--text-color-gray);
     margin-top: 18px;
     font-size: var(--fz-16);
+    line-height: 1.2;
   }
 
   &Button {
@@ -54,8 +58,8 @@
 
 @media (max-width: 576px) {
   .post {
-    &:hover {
-      .postTitle {
+    &Title {
+      &:hover {
         text-decoration: none;
       }
     }
@@ -70,6 +74,14 @@
 
     &Img {
       padding-bottom: 50%;
+    }
+
+    &Info {
+      a {
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 }

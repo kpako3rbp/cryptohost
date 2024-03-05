@@ -23,6 +23,7 @@ export async function loadPosts(start, end) {
     _id,
     title,
     'category': category->name,
+    'categorySlug': category->slug,
     publishedDate,
     image,
     slug,

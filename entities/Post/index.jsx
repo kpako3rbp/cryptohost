@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { urlFor } from '@/lib/client';
-import ButtonLink from '@/shared/ButtonLink';
 import { extractPostDescription } from '@/shared/lib/postHelpers';
 import PixelizedImg from '@/shared/PixelizedImg';
 import Title from '@/shared/Title';
@@ -12,7 +11,7 @@ import Title from '@/shared/Title';
 import styles from './index.module.scss';
 
 const Post = (props) => {
-  const { className, index, title, category, publishedDate, image, slug, body } = props;
+  const { className, title, category, categorySlug, publishedDate, image, slug, body } = props;
   const date = format(new Date(publishedDate), 'dd MMM, yyyy');
 
   // Создаем описание поста
@@ -26,7 +25,10 @@ const Post = (props) => {
         </Link>
         <div className={styles.postInner}>
           <div className={styles.postInfo}>
-            <span className={styles.postCategory}>{category}</span> / {date}
+            <Link className={styles.postCategory} href={`/${encodeURIComponent(categorySlug.current)}`}>
+              {category}
+            </Link>{' '}
+            / {date}
           </div>
           <Link href={`post/${encodeURIComponent(slug.current)}`}>
             <Title type={'small'} className={styles.postTitle}>
@@ -34,10 +36,6 @@ const Post = (props) => {
             </Title>
           </Link>
           <p className={styles.postText}>{description}</p>
-
-          {/*          <ButtonLink className={styles.postButton} href={`post/${encodeURIComponent(slug.current)}`}>
-            Читать →
-          </ButtonLink>*/}
         </div>
       </div>
     )
