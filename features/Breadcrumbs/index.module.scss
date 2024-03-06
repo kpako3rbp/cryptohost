@@ -1,0 +1,54 @@
+.breadcrumbs {
+  padding: 40px 0 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  line-height: 1.2;
+
+  li {
+    display: inline-block;
+    a {
+      color: var(--text-color-gray);
+      padding: 20px 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:first-child {
+      a {
+        padding-left: 0;
+      }
+    }
+
+    &:last-child {
+      a {
+        color: var(--purple-color);
+      }
+    }
+  }
+
+}
+
+@media (max-width: 576px) {
+  .breadcrumbs {
+    padding: 20px 0;
+    li {
+      line-height: 1.8;
+
+      a {
+        padding: 10px 0;
+      }
+
+      &:last-child {
+        width: 240px; /* заданная ширина */
+        white-space: nowrap; /* текст не переносится на новую строку */
+        overflow: hidden; /* скрывает текст, который выходит за пределы элемента */
+        text-overflow: ellipsis; /* добавляет многоточие в конце */
+      }
+    }
+  }
+}

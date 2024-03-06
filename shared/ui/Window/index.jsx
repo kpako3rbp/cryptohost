@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 
-import ToolButton from '@/shared/ToolButton';
+import ToolButton from '@/shared/ui/ToolButton';
 import { closeModal } from '@/slices/modalSlice';
 
 import styles from './index.module.scss';

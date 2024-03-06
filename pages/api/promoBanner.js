@@ -9,7 +9,14 @@ export default async function promoBanner(req, res) {
 }
 
 export async function loadPromoBanner() {
-  const query = `*[_type == "promoBanner"]`;
+  const query = `*[_type == "promoBanner"] {
+    _id,
+    title,
+    image,
+    slug,
+    description,
+    _type
+  }`;
   const loadedPromoBanner = await client.fetch(query);
 
   return {

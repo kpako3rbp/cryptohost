@@ -4,10 +4,10 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import { urlFor } from '@/lib/client';
-import ButtonLink from '@/shared/ButtonLink';
+import ButtonLink from '@/shared/ui/ButtonLink';
 import { extractPostDescription } from '@/shared/lib/postHelpers';
-import PixelizedImg from '@/shared/PixelizedImg';
-import Title from '@/shared/Title';
+import PixelizedImg from '@/shared/ui/PixelizedImg';
+import Title from '@/shared/ui/Title';
 
 import styles from './index.module.scss';
 
@@ -40,7 +40,7 @@ const MainPost = (props) => {
   return (
     title && (
       <div className={styles.post}>
-        <Link href={`post/${encodeURIComponent(slug.current)}`}>
+        <Link href={`news/${encodeURIComponent(slug.current)}`}>
           <PixelizedImg className={styles.postImg} src={urlFor(image).url()} alt={''} pixelScale={12}></PixelizedImg>
         </Link>
         <div className={styles.postInner}>
@@ -51,7 +51,7 @@ const MainPost = (props) => {
               </Link>{' '}
               / {date}
             </div>
-            <Link href={`post/${encodeURIComponent(slug.current)}`}>
+            <Link href={`news/${encodeURIComponent(slug.current)}`}>
               <Title type={'small'} className={styles.postTitle}>
                 {title}
               </Title>
@@ -59,7 +59,7 @@ const MainPost = (props) => {
             <p className={styles.postText}>{description}</p>
           </div>
 
-          <ButtonLink className={styles.postButton} href={`post/${encodeURIComponent(slug.current)}`}>
+          <ButtonLink className={styles.postButton} href={`news/${encodeURIComponent(slug.current)}`}>
             Читать →
           </ButtonLink>
         </div>

@@ -5,12 +5,12 @@ import { FaTelegramPlane } from 'react-icons/fa';
 import { IoMenu } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 
-import Button from '@/shared/Button';
-import Container from '@/shared/Container';
-import Logo from '@/shared/Logo';
-import Navigation from '@/shared/Navigation';
+import Button from '@/shared/ui/Button';
+import Container from '@/shared/ui/Container';
+import Logo from '@/shared/ui/Logo';
+import Navigation from '@/shared/ui/Navigation';
 import { openModal } from '@/slices/modalSlice';
-import ButtonLink from "@/shared/ButtonLink";
+import ButtonLink from "@/shared/ui/ButtonLink";
 
 import styles from './index.module.scss';
 
@@ -36,7 +36,7 @@ const Header = (props) => {
     };
   }, []);
 
-  const headerClassName = cl(styles.header, {
+  const headerClassName = cl(className, styles.header, {
     [styles.headerScrolled]: isScrolled,
   });
 
@@ -50,7 +50,7 @@ const Header = (props) => {
             <Logo descriptor={true} className={styles.headerLogo}></Logo>
           </Link>
           <Navigation className={styles.headerNavigation} />
-          <ButtonLink href={'https://t.me/kpako3rbp'} color={'green'} className={styles.headerButton}>
+          <ButtonLink href={'https://t.me/kpako3rbp'} target={'blank'} color={'green'} className={styles.headerButton}>
             <FaTelegramPlane /> Подпишись!
           </ButtonLink>
 

@@ -41,6 +41,7 @@
   --green-color: #85e17e;
   --blue-color: #82c0d5;
   --gray-color: #ddd8cc;
+  --gray-med-color: #c7c3b8;
   --purple-color: #5f3bc2;
   --white-color: #ffffff;
   --text-color-gray: #7b7583;
@@ -55,6 +56,8 @@
   --box-shadow-sm: 3px 3px 0px 0px var(--black-color);
   --box-shadow-sm-hover: 1px 1px 0px 0px var(--black-color);
   --border-black: 2px solid var(--black-color);
+
+  --border-gray: 2px solid var(--gray-color);
 }
 
 @media (prefers-color-scheme: dark) {

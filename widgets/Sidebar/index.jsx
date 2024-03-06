@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import { FaTelegramPlane } from 'react-icons/fa';
 
-import Button from '@/shared/Button';
-import Navigation from '@/shared/Navigation';
-import Window from '@/shared/Window';
+import Button from '@/shared/ui/Button';
+import Navigation from '@/shared/ui/Navigation';
+import Window from '@/shared/ui/Window';
 
 import styles from './index.module.scss';
 

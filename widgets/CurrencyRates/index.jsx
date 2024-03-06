@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 
 import { getCurrencyRates } from '@/pages/api/currencyRates';
-import CurrencyRateItem from '@/shared/CurrencyRateItem';
-import GriddedCard from '@/shared/GriddedCard';
-import Section from '@/shared/Section';
+import CurrencyRateItem from '@/shared/ui/CurrencyRateItem';
+import GriddedCard from '@/shared/ui/GriddedCard';
+import Section from '@/shared/ui/Section';
 import { updateRates, updateResponseTime } from '@/slices/currencyRatesSlice';
 
 import styles from './index.module.scss';

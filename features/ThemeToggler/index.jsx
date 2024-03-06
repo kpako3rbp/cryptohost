@@ -2,7 +2,7 @@ import React from 'react';
 import { ImContrast } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@/shared/Button';
+import Button from '@/shared/ui/Button';
 import { toggleTheme } from '@/slices/themeSlice';
 
 import styles from './index.module.scss';

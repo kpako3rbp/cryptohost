@@ -9,7 +9,7 @@
 
   &Scrolled {
     background-color: var(--gray-color);
-    border-bottom: var(--border-black);
+    border-bottom: var(--border-black) !important;
     // border-top: var(--border-black);
 
     .header {

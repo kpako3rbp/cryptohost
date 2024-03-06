@@ -2,12 +2,16 @@ import cl from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { closeModal } from '@/slices/modalSlice';
 
 import styles from './index.module.scss';
 
 const Navigation = (props) => {
   const { className } = props;
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const links = [
     {
@@ -32,7 +36,7 @@ const Navigation = (props) => {
 
           return (
             <li key={link.route} className={linkClassName}>
-              <Link href={link.route} className={linkClassName}>
+              <Link href={link.route} className={linkClassName} onClick={() => dispatch(closeModal())}>
                 {link.name}
               </Link>
             </li>

@@ -27,7 +27,8 @@ export async function loadPosts(start, end) {
     publishedDate,
     image,
     slug,
-    body
+    body,
+    _type
   },
   "total": count(*[_type == "post"])
   }`;

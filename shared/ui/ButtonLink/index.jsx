@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './index.module.scss';
 
 const ButtonLink = (props) => {
-  const { className, children, href, color = 'blue' } = props;
+  const { className, children, href, target, color = 'blue' } = props;
 
   const buttonClassName = cl(
     styles.button,
@@ -14,7 +14,7 @@ const ButtonLink = (props) => {
   );
 
   return (
-    <Link href={href} className={cl(className, buttonClassName)}>
+    <Link href={href} target={target && 'blank'} className={cl(className, buttonClassName)}>
       <div className={styles.buttonInner}>{children}</div>
     </Link>
   );

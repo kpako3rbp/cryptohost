@@ -1,10 +1,18 @@
 .layout {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   position: relative;
+
+  display: flex;
+  flex-direction: column;
   // overflow-x: hidden;
 
   background-color: var(--background-color);
+
+  &HeaderUnderline {
+    border-bottom: var(--border-gray);
+  }
 
   &Main {
     overflow-x: hidden;
@@ -25,6 +33,7 @@
     --green-color: #2f7e2d;
     --blue-color: #1f82a6;
     --gray-color: #2a2729;
+    --gray-med-color: #3b373a;
     --purple-color: #7765bd;
     --white-color: #3a3934;
     --text-color-gray: #a09c9f;

@@ -1,10 +1,18 @@
 .section {
   width: 100%;
   padding: 50px 0;
+
+  &WithoutTopPadding {
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 576px) {
   .section {
     padding: 30px 0;
+
+    &WithoutTopPadding {
+      padding-top: 0;
+    }
   }
 }

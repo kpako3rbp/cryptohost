@@ -5,8 +5,8 @@ import React from 'react';
 
 import { urlFor } from '@/lib/client';
 import { extractPostDescription } from '@/shared/lib/postHelpers';
-import PixelizedImg from '@/shared/PixelizedImg';
-import Title from '@/shared/Title';
+import PixelizedImg from '@/shared/ui/PixelizedImg';
+import Title from '@/shared/ui/Title';
 
 import styles from './index.module.scss';
 
@@ -20,7 +20,7 @@ const Post = (props) => {
   return (
     title && (
       <div className={styles.post}>
-        <Link href={`post/${encodeURIComponent(slug.current)}`}>
+        <Link href={`news/${encodeURIComponent(slug.current)}`}>
           <PixelizedImg className={styles.postImg} src={urlFor(image).url()} alt={''} pixelScale={9}></PixelizedImg>
         </Link>
         <div className={styles.postInner}>
@@ -30,7 +30,7 @@ const Post = (props) => {
             </Link>{' '}
             / {date}
           </div>
-          <Link href={`post/${encodeURIComponent(slug.current)}`}>
+          <Link href={`news/${encodeURIComponent(slug.current)}`}>
             <Title type={'small'} className={styles.postTitle}>
               {title}
             </Title>

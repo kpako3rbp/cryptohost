@@ -1,6 +1,6 @@
 import cl from 'classnames';
 import React from 'react';
-import Container from "@/shared/Container";
+import Container from "@/shared/ui/Container";
 
 import styles from './index.module.scss';
 import Link from "next/link";

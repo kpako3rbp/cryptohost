@@ -6,11 +6,11 @@ import MainPost from '@/entities/MainPost';
 import Post from '@/entities/Post';
 import { loadPosts } from '@/pages/api/posts';
 import { loadPromoBanner } from '@/pages/api/promoBanner';
-import ButtonLink from '@/shared/ButtonLink';
-import Layout from '@/shared/Layout';
-import PostGrid from '@/shared/PostGrid';
-import Section from '@/shared/Section';
-import Title from '@/shared/Title';
+import ButtonLink from '@/shared/ui/ButtonLink';
+import Layout from '@/shared/ui/Layout';
+import PostGrid from '@/shared/ui/PostGrid';
+import Section from '@/shared/ui/Section';
+import Title from '@/shared/ui/Title';
 import { setPosts } from '@/slices/postsSlice';
 import { setPromoBanner } from '@/slices/promoBannerSlice';
 import CurrencyRates from '@/widgets/CurrencyRates';
@@ -46,7 +46,7 @@ const Home = (props) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <Layout isHomePage={true}>
         <Section>
           <Promo />
         </Section>

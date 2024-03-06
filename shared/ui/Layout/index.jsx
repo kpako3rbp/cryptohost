@@ -1,9 +1,9 @@
 import cl from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleTheme, setTheme } from '@/slices/themeSlice';
 
 import ThemeToggler from '@/features/ThemeToggler';
+import { setTheme } from '@/slices/themeSlice';
 import Footer from '@/widgets/Footer';
 import Header from '@/widgets/Header';
 import Sidebar from '@/widgets/Sidebar';
@@ -11,7 +11,7 @@ import Sidebar from '@/widgets/Sidebar';
 import styles from './index.module.scss';
 
 const Layout = (props) => {
-  const { children } = props;
+  const { children, isHomePage = false } = props;
   const dispatch = useDispatch();
   // const [isModalOpen, setIsModalOpen] = useState();
   const isModalOpen = useSelector((state) => state.modalState.isOpen);
@@ -24,18 +24,18 @@ const Layout = (props) => {
     }
   }, [dispatch]);
 
-/*  useEffect(() => {
-    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
-  }, [theme]);*/
-
   const layoutClassNames = cl(styles.layout, {
     [styles.layoutFixed]: isModalOpen,
     [styles.layoutDarkTheme]: theme === 'dark',
   });
 
+  const headerClassNames = cl({
+    [styles.layoutHeaderUnderline]: !isHomePage,
+  });
+
   return (
     <div className={layoutClassNames}>
-      <Header />
+      <Header className={headerClassNames} />
       <Sidebar />
       <main className={styles.layoutMain}>{children}</main>
       <Footer />
