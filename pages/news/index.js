@@ -22,11 +22,8 @@ import Subscribe from '@/widgets/Subscribe';
 const LOAD_MORE_STEP = 6;
 
 const News = (props) => {
+  const { initialPosts, total } = props;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setPromoBanner(promoBanner));
-  }, [dispatch, promoBanner]);
 
   useEffect(() => {
     dispatch(setPosts({ posts: initialPosts, total }));
@@ -37,7 +34,6 @@ const News = (props) => {
     { name: 'Новости', url: '/news' },
   ];
 
-  const { promoBanner, initialPosts, total } = props;
   const posts = useSelector((state) => state.postsData.posts);
   const mainPost = initialPosts[0];
 
@@ -104,11 +100,9 @@ const News = (props) => {
 };
 
 export const getServerSideProps = async () => {
-  const { loadedPromoBanner } = await loadPromoBanner();
   const { loadedPosts, total } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост
   return {
     props: {
-      promoBanner: loadedPromoBanner,
       initialPosts: loadedPosts,
       total,
     },

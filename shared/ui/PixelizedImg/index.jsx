@@ -12,7 +12,7 @@ const PixelizedImage = (props) => {
   const canvasRef = useRef();
 
   useEffect(() => {
-    if (src && imageRef.current.complete) {
+    if (src && imageRef.current && imageRef.current.complete) {
       pixelizeImg(imageRef.current);
     }
   }, [src]);
@@ -23,6 +23,7 @@ const PixelizedImage = (props) => {
       to: canvasRef.current,
     });
     let scale = pixelScale; // Начальный масштаб
+
     px.setScale(scale).pixelate();
 
     setInterval(() => {
@@ -34,10 +35,9 @@ const PixelizedImage = (props) => {
   return (
     <div className={cl(styles.image, className)}>
       <img ref={imageRef} src={src} alt={alt} onLoad={() => pixelizeImg(imageRef.current)} />
-      <canvas ref={canvasRef} ></canvas>
+      <canvas ref={canvasRef}></canvas>
     </div>
   );
 };
 
 export default PixelizedImage;
-
