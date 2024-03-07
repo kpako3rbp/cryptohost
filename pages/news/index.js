@@ -36,13 +36,14 @@ const News = (props) => {
 
   const posts = useSelector((state) => state.postsData.posts);
   const currentCategories = useSelector((state) => state.postsData.categories);
+  const totalPosts = useSelector((state) => state.postsData.total);
   // const mainPost = initialPosts[0];
   const mainPost = posts[0] || initialPosts[0];
 
   const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP + 1); // Потому что еще главный пост
   const [loading, setLoading] = useState(false);
 
-  const isLoadButton = total > loadedAmount;
+  const isLoadButton = totalPosts > loadedAmount;
 
   const getMorePosts = async () => {
     setLoading(true);
