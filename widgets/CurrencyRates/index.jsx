@@ -17,18 +17,27 @@ const CurrencyRates = (props) => {
   const { children, className, hasTitle = true } = props;
   const dispatch = useDispatch();
   const { rates, updateTime } = useSelector((state) => state.currencyRates);
+  const [loading, setLoading] = useState(true); // Состояние загрузки данных
+  const [error, setError] = useState(false); // Состояние ошибки загрузки данных
 
   useEffect(() => {
     const fetchData = async () => {
-      const currentTime = new Date();
-      const hours = currentTime.getHours().toString().padStart(2, '0');
-      const minutes = currentTime.getMinutes().toString().padStart(2, '0');
-      const formattedTime = { hours, minutes };
+      try {
+        const currentTime = new Date();
+        const hours = currentTime.getHours().toString().padStart(2, '0');
+        const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+        const formattedTime = { hours, minutes };
 
-      dispatch(updateResponseTime(formattedTime));
+        dispatch(updateResponseTime(formattedTime));
 
-      const data = await getCurrencyRates();
-      dispatch(updateRates(data));
+        const data = await getCurrencyRates();
+        dispatch(updateRates(data));
+        setLoading(false);
+      } catch (err) {
+        console.log('ERRROROROROOROROROORORO');
+        setLoading(false);
+        setError(true);
+      }
     };
 
     fetchData();
@@ -56,14 +65,22 @@ const CurrencyRates = (props) => {
   };
 
   return (
-    rates && (
-      <div className={cl(className, styles.rates)}>
-        {hasTitle && (
-          <h3 className={styles.ratesTitle}>
-            Курсы криптовалют / обновлено {updateTime.hours} <span className={styles.ratesDots}>:</span>{' '}
-            {updateTime.minutes}
-          </h3>
-        )}
+    <div className={cl(className, styles.rates)}>
+      <h3 className={styles.ratesTitle}>
+        Курсы криптовалют / обновлено {rates && updateTime.hours} <span className={styles.ratesDots}>:</span>{' '}
+        {rates ? updateTime.minutes : '—'}
+      </h3>
+      {loading && !error && (
+        <GriddedCard className={styles.ratesCard}>
+          <div className={styles.ratesMessage}>Загрузка...</div>
+        </GriddedCard>
+      )}
+      {!loading && error && (
+        <GriddedCard className={styles.ratesCard}>
+          <div className={styles.ratesMessage}>Данные не загружены, что-то пошло не так</div>
+        </GriddedCard>
+      )}
+      {!loading && !error && (
         <GriddedCard className={styles.ratesCard}>
           <Slider {...sliderSettings}>
             {rates.map((rate) => (
@@ -71,8 +88,8 @@ const CurrencyRates = (props) => {
             ))}
           </Slider>
         </GriddedCard>
-      </div>
-    )
+      )}
+    </div>
   );
 };
 

@@ -13,6 +13,11 @@
   box-shadow: var(--box-shadow-sm);
   border-radius: var(--br);
 
+  img {
+    display: none
+  }
+
+
   canvas, img {
     position: absolute;
     top: 0;

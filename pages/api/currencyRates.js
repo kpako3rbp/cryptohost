@@ -62,10 +62,11 @@ export async function getCurrencyRates() {
 
   try {
     const { data } = await axios.get(
-      `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoSymbols}&tsyms=${OUT_CURRENCY}&api_key=${apiKey}`,
+      `https://min-api.cryptocompare1.com/data/pricemultifull?fsyms=${cryptoSymbols}&tsyms=${OUT_CURRENCY}&api_key=${apiKey}`,
     );
     return formatCurrencyRates(data);
   } catch (error) {
     console.error('Error fetching crypto prices:', error);
+    throw new Error('Error fetching crypto prices');
   }
 }
