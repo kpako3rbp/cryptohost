@@ -31,6 +31,15 @@
     background-color: var(--green-color);
   }
 
+  &Gray {
+    background-color: var(--gray-color);
+  }
+
+  &PaddingSmall {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
   &:hover {
     transform: translate(2px, 2px);
     box-shadow: var(--box-shadow-sm-hover);

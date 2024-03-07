@@ -15,7 +15,7 @@ const PixelizedImage = (props) => {
     if (src && imageRef.current && imageRef.current.complete) {
       pixelizeImg(imageRef.current);
     }
-  }, [src]);
+  }, [src, imageRef.current]);
 
   const pixelizeImg = (img) => {
     const px = new Pixelit({

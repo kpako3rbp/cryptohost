@@ -5,12 +5,14 @@ import React from 'react';
 import styles from './index.module.scss';
 
 const ButtonLink = (props) => {
-  const { className, children, href, target, color = 'blue' } = props;
+  const { className, children, href, target, color = 'blue', padding = 'default' } = props;
 
   const buttonClassName = cl(
     styles.button,
     { [styles.buttonBlue]: color === 'blue' },
     { [styles.buttonGreen]: color === 'green' },
+    { [styles.buttonGray]: color === 'gray' },
+    { [styles.buttonPaddingSmall]: padding === 'small' },
   );
 
   return (

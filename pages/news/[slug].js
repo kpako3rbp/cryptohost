@@ -1,18 +1,11 @@
-import { format } from 'date-fns';
-import Head from 'next/head';
-import Link from 'next/link';
 import React from 'react';
 
 // import { Article, Content, Title } from '@/components';
 import Article from '@/entities/Article';
 import Breadcrumbs from '@/features/Breadcrumbs';
-import { client, urlFor } from '@/lib/client';
 import { loadCurrentPost, fetchPostsPaths } from '@/pages/api/currentPost';
-import Content from '@/shared/ui/Content';
 import Layout from '@/shared/ui/Layout';
-import PixelizedImg from '@/shared/ui/PixelizedImg';
 import Section from '@/shared/ui/Section';
-import Title from '@/shared/ui/Title';
 import Subscribe from '@/widgets/Subscribe';
 
 import styles from './styles.module.scss';

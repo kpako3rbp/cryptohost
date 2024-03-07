@@ -1,7 +1,7 @@
 import { client } from '@/lib/client';
 
 export default async function posts(req, res) {
-  const { start, end } = req.query;
+  const { start, end, categories } = req.query;
 
   if (isNaN(Number(start)) || isNaN(Number(end))) {
     return res.status(400).json({
@@ -9,33 +9,46 @@ export default async function posts(req, res) {
     });
   }
 
-  const { loadedPosts, total } = await loadPosts(start, end);
+  const { loadedPosts, total, postsCategories } = await loadPosts(start, end, categories);
 
   res.status(200).json({
     posts: loadedPosts,
     total,
+    currentPostsCategories: postsCategories,
   });
 }
 
-export async function loadPosts(start, end) {
+export async function loadPosts(start, end, categories = '') {
+  let categoryQuery = '';
+
+  if (categories && JSON.parse(categories).length > 0) {
+    const categoryFilters = JSON.parse(categories).map((category) => `category->slug.current == '${category}'`);
+    categoryQuery = ` && (${categoryFilters.join(' || ')})`;
+  }
+
   const query = `{
-  "posts": *[_type == "post"] | order(publishedDate desc) [${start}...${end}] {
-    _id,
-    title,
-    'category': category->name,
-    'categorySlug': category->slug,
-    publishedDate,
-    image,
-    slug,
-    body,
-    _type
-  },
-  "total": count(*[_type == "post"])
+    "posts": *[_type == "post"${categoryQuery}] | order(publishedDate desc) [${start}...${end}] {
+      _id,
+      title,
+      'category': category->name,
+      'categorySlug': category->slug.current,
+      publishedDate,
+      image,
+      slug,
+      body,
+      _type
+    },
+    "total": count(*[_type == "post"${categoryQuery}])
   }`;
+
+  console.log(query);
+  console.log(start, end, categories, 'start, end, categories');
+
   const { posts: loadedPosts, total } = await client.fetch(query);
 
   return {
     loadedPosts,
     total,
+    postsCategories: categories,
   };
 }

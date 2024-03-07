@@ -1,4 +1,4 @@
-import {transliterate} from 'transliteration';
+import {transliterate} from 'transliteration'
 
 export default {
   name: 'category',
@@ -9,7 +9,7 @@ export default {
       name: 'name',
       title: 'Название',
       type: 'string',
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'slug',
@@ -19,7 +19,11 @@ export default {
       options: {
         source: 'name',
         maxLength: 200, // will be ignored if slugify is set
-        slugify: (input) => transliterate(input.replace(/[^a-zA-Zа-яА-Я\s]/g, '')).toLowerCase().replace(/\s+/g, '-').slice(0, 200),
+        slugify: (input) =>
+          transliterate(input.replace(/[^a-zA-Zа-яА-Я\s]/g, ''))
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .slice(0, 200),
       },
     },
   ],
