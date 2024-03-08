@@ -2,18 +2,22 @@ import cl from 'classnames';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { urlFor } from '@/lib/client';
-import ButtonLink from '@/shared/ui/ButtonLink';
 import { extractPostDescription } from '@/shared/lib/postHelpers';
+import ButtonLink from '@/shared/ui/ButtonLink';
 import PixelizedImg from '@/shared/ui/PixelizedImg';
 import Title from '@/shared/ui/Title';
+import { setCategories } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
 
 const MainPost = (props) => {
   const { className, index, title, category, categorySlug, publishedDate, image, slug, body } = props;
   const date = format(new Date(publishedDate), 'dd MMM, yyyy');
+
+  const dispatch = useDispatch();
 
   const [maxCharacters, setMaxCharacters] = useState(400);
 
@@ -46,7 +50,11 @@ const MainPost = (props) => {
         <div className={styles.postInner}>
           <div>
             <div className={styles.postInfo}>
-              <Link className={styles.postCategory} href={`/news?category=${categorySlug}`}>
+              <Link
+                className={styles.postCategory}
+                href={`/news?category=${categorySlug}`}
+                onClick={() => dispatch(setCategories(categorySlug))}
+              >
                 {category}
               </Link>{' '}
               / {date}

@@ -28,16 +28,18 @@ const News = (props) => {
   const { initialPosts, total, categoriesList, currentPostsCategories } = props;
   const dispatch = useDispatch();
 
+  // console.log('initialPosts999999999', initialPosts)
+
   const router = useRouter();
   const { category } = router.query;
   const initCategory = category || [];
 
-  console.log('initCategory', initCategory)
+  // console.log('initCategory', initCategory);
 
   useEffect(() => {
     dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
     dispatch(setCategories(initCategory));
-  }, [dispatch]);
+  }, [dispatch, initialPosts]);
 
   const paths = [
     { name: 'Главная', url: '/' },

@@ -11,7 +11,7 @@ import styles from './index.module.scss';
 const POSTS_TO_LOAD = 7;
 
 const Categories = (props) => {
-  const { className, categories, initCategory } = props;
+  const { className, categories } = props;
   const dispatch = useDispatch();
   const currentCategories = useSelector((state) => state.postsData.categories);
 
@@ -27,6 +27,8 @@ const Categories = (props) => {
 
   const getPostsByCategories = async (newCategory) => {
     setLoading(true);
+
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
     const isAlreadySelected = selectedCategories.includes(newCategory); //
     const updatedCategories = isAlreadySelected
