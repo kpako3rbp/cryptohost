@@ -22,8 +22,11 @@ const postsSlice = createSlice({
     removeCategory: (state, action) => {
       state.categories = state.categories.filter((category) => category !== action.payload);
     },
+    setCategories: (state, action) => {
+      state.categories = action.payload;
+    },
   },
 });
 
-export const { setPosts, addPosts, addCategory } = postsSlice.actions;
+export const { setPosts, addPosts, addCategory, setCategories, removeCategory } = postsSlice.actions;
 export default postsSlice.reducer;

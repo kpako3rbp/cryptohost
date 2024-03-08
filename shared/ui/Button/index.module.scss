@@ -59,3 +59,12 @@
   }
 }
 
+@media (max-width: 576px) {
+  .button {
+    &:hover {
+      box-shadow: var(--box-shadow-sm);
+      transform: translate(0, 0);
+    }
+  }
+}
+

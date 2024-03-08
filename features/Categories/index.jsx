@@ -13,7 +13,6 @@ const POSTS_TO_LOAD = 7;
 
 const Categories = (props) => {
   const { children, className, categories } = props;
-  console.log(categories, 'CATEGORIES');
   const dispatch = useDispatch();
   const currentCategories = useSelector((state) => state.postsData.categories);
 
@@ -23,8 +22,8 @@ const Categories = (props) => {
   const getPostsByCategories = async (newCategory) => {
     setLoading(true);
 
-    const alreadySelected = selectedCategories.includes(newCategory); //
-    const updatedCategories = alreadySelected
+    const isAlreadySelected = selectedCategories.includes(newCategory); //
+    const updatedCategories = isAlreadySelected
       ? selectedCategories.filter((category) => category !== newCategory)
       : [...selectedCategories, newCategory];
 
@@ -39,7 +38,7 @@ const Categories = (props) => {
 
       dispatch(setPosts({ posts: data.posts, total: data.total }));
       setSelectedCategories(updatedCategories);
-      alreadySelected ? dispatch(removeCategory(newCategory)) : dispatch(addCategory(newCategory));
+      isAlreadySelected ? dispatch(removeCategory(newCategory)) : dispatch(addCategory(newCategory));
     } catch (err) {
       console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
     } finally {

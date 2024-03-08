@@ -46,7 +46,7 @@ const MainPost = (props) => {
         <div className={styles.postInner}>
           <div>
             <div className={styles.postInfo}>
-              <Link className={styles.postCategory} href={`/news/${encodeURIComponent(categorySlug.current)}`}>
+              <Link className={styles.postCategory} href={`/news?category=${categorySlug}`}>
                 {category}
               </Link>{' '}
               / {date}

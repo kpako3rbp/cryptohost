@@ -17,7 +17,6 @@ const Post = (props) => {
   const paths = [
     { name: 'Главная', url: '/' },
     { name: 'Новости', url: '/news' },
-    { name: post.category, url: `/${encodeURIComponent(post.categorySlug.current)}` },
     { name: post.title, url: `/news/${encodeURIComponent(post.slug.current)}` },
   ];
 

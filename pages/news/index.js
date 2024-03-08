@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,8 +17,10 @@ import PageDescriptor from '@/shared/ui/PageDescriptor';
 import PostGrid from '@/shared/ui/PostGrid';
 import Section from '@/shared/ui/Section';
 import Title from '@/shared/ui/Title';
-import { addPosts, setPosts } from '@/slices/postsSlice';
+import { addPosts, setCategories, setPosts } from '@/slices/postsSlice';
 import Subscribe from '@/widgets/Subscribe';
+
+import styles from './styles.module.scss';
 
 const LOAD_MORE_STEP = 6;
 
@@ -25,18 +28,30 @@ const News = (props) => {
   const { initialPosts, total, categoriesList, currentPostsCategories } = props;
   const dispatch = useDispatch();
 
+  //const router = useRouter();
+  //const { category: initCategory } = router.query || [];
+
   useEffect(() => {
     dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
+
+    /*    if (initCategory) {
+      dispatch(setCategories([initCategory]));
+    }*/
   }, [dispatch]);
+
+  /*  useEffect(() => {
+    dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
+  }, [dispatch]);*/
 
   const paths = [
     { name: 'Главная', url: '/' },
     { name: 'Новости', url: '/news' },
   ];
 
-  const posts = useSelector((state) => state.postsData.posts);
-  const currentCategories = useSelector((state) => state.postsData.categories);
-  const totalPosts = useSelector((state) => state.postsData.total);
+  // const posts = useSelector((state) => state.postsData.posts);
+  // const currentCategories = useSelector((state) => state.postsData.categories);
+  // const totalPosts = useSelector((state) => state.postsData.total);
+  const { posts, categories: currentCategories, total: totalPosts } = useSelector((state) => state.postsData);
   // const mainPost = initialPosts[0];
   const mainPost = posts[0] || initialPosts[0];
 
@@ -86,7 +101,7 @@ const News = (props) => {
         </Section>
 
         <Section noTopPadding={true}>
-          <PostGrid>
+          <PostGrid className={styles.postGrid}>
             <MainPost {...mainPost} />
             {posts.slice(1).map((post) => (
               <Post key={post.slug.current} {...post} />
@@ -108,8 +123,11 @@ const News = (props) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const { loadedPosts, total, postsCategories: currentPostsCategories } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост
+export const getServerSideProps = async (context) => {
+  const { category } = context.query; // Получаем значение параметра запроса category
+  const initCategory = category ? [category] : [];
+
+  const { loadedPosts, total, postsCategories: currentPostsCategories } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост   , JSON.stringify(initCategory)
   const { categories: categoriesList } = await loadCategories();
   return {
     props: {

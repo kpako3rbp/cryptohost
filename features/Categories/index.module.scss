@@ -18,3 +18,31 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    gap: 10px;
+
+    &Btn {
+      padding: 10px;
+      margin: 0;
+    }
+
+  }
+}
+
+@media (max-width: 576px) {
+  .categories {
+    padding-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(40%, auto));
+
+    &Btn {
+      padding: 8px;
+      margin: 0;
+      font-size: 14px;
+    }
+
+  }
+}
