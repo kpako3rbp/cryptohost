@@ -17,13 +17,17 @@ const postsSlice = createSlice({
       state.total = action.payload.total;
     },
     addCategory: (state, action) => {
-      state.categories = [...state.categories, action.payload];
+      if (state.categories.includes(action.payload)) {
+        state.categories = state.categories.filter((category) => category !== action.payload);
+      } else {
+        state.categories = [...state.categories, action.payload];
+      }
     },
     removeCategory: (state, action) => {
       state.categories = state.categories.filter((category) => category !== action.payload);
     },
     setCategories: (state, action) => {
-      state.categories = action.payload;
+      state.categories = action.payload.length > 0 ? [action.payload] : [];
     },
   },
 });

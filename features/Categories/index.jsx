@@ -1,23 +1,29 @@
 import axios from 'axios';
 import cl from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@/shared/ui/Button';
-import ButtonLink from '@/shared/ui/ButtonLink';
-import { addCategory, removeCategory, setPosts } from '@/slices/postsSlice';
+import { addCategory, setCategories, setPosts } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
 
 const POSTS_TO_LOAD = 7;
 
 const Categories = (props) => {
-  const { children, className, categories } = props;
+  const { className, categories, initCategory } = props;
   const dispatch = useDispatch();
   const currentCategories = useSelector((state) => state.postsData.categories);
 
+  // const initCategories = useSelector((state) => state.postsData.categories);
+  // const currentCategories = initCategory ? [initCategory] : initCategories;
+
   const [loading, setLoading] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(currentCategories);
+
+  useEffect(() => {
+    setSelectedCategories(currentCategories);
+  }, [currentCategories]);
 
   const getPostsByCategories = async (newCategory) => {
     setLoading(true);
@@ -38,7 +44,7 @@ const Categories = (props) => {
 
       dispatch(setPosts({ posts: data.posts, total: data.total }));
       setSelectedCategories(updatedCategories);
-      isAlreadySelected ? dispatch(removeCategory(newCategory)) : dispatch(addCategory(newCategory));
+      dispatch(addCategory(newCategory));
     } catch (err) {
       console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
     } finally {
@@ -52,7 +58,7 @@ const Categories = (props) => {
         const { name, slug } = category;
 
         const buttonClassName = cl(className, styles.categoriesBtn, {
-          [styles.categoriesBtnActive]: selectedCategories.includes(slug.current),
+          [styles.categoriesBtnActive]: currentCategories.includes(slug.current),
         });
 
         return (

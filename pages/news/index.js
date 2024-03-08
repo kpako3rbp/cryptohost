@@ -28,31 +28,23 @@ const News = (props) => {
   const { initialPosts, total, categoriesList, currentPostsCategories } = props;
   const dispatch = useDispatch();
 
-  //const router = useRouter();
-  //const { category: initCategory } = router.query || [];
+  const router = useRouter();
+  const { category } = router.query;
+  const initCategory = category || [];
+
+  console.log('initCategory', initCategory)
 
   useEffect(() => {
     dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
-
-    /*    if (initCategory) {
-      dispatch(setCategories([initCategory]));
-    }*/
+    dispatch(setCategories(initCategory));
   }, [dispatch]);
-
-  /*  useEffect(() => {
-    dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
-  }, [dispatch]);*/
 
   const paths = [
     { name: 'Главная', url: '/' },
     { name: 'Новости', url: '/news' },
   ];
 
-  // const posts = useSelector((state) => state.postsData.posts);
-  // const currentCategories = useSelector((state) => state.postsData.categories);
-  // const totalPosts = useSelector((state) => state.postsData.total);
   const { posts, categories: currentCategories, total: totalPosts } = useSelector((state) => state.postsData);
-  // const mainPost = initialPosts[0];
   const mainPost = posts[0] || initialPosts[0];
 
   const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP + 1); // Потому что еще главный пост
@@ -80,6 +72,8 @@ const News = (props) => {
     }
   };
 
+  // TODO вместо Link на категориях попробовать сделать функцию, которая будет включать нужную категорию. То есть перенести getPostsByCategories сюда
+
   return (
     <>
       <Head>
@@ -97,7 +91,7 @@ const News = (props) => {
             </Link>{' '}
             , чтобы не пропустить ни одной полезной новости.
           </PageDescriptor>
-          <Categories categories={categoriesList} />
+          <Categories categories={categoriesList} initCategory={initCategory} />
         </Section>
 
         <Section noTopPadding={true}>
@@ -127,7 +121,12 @@ export const getServerSideProps = async (context) => {
   const { category } = context.query; // Получаем значение параметра запроса category
   const initCategory = category ? [category] : [];
 
-  const { loadedPosts, total, postsCategories: currentPostsCategories } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост   , JSON.stringify(initCategory)
+  const {
+    loadedPosts,
+    total,
+    postsCategories: currentPostsCategories,
+  } = await loadPosts(0, LOAD_MORE_STEP + 1, JSON.stringify(initCategory)); // на один пост больше, потому что еще есть главный пост   , JSON.stringify(initCategory)
+
   const { categories: categoriesList } = await loadCategories();
   return {
     props: {
