@@ -1,19 +1,23 @@
 import cl from 'classnames';
 import { format } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { urlFor } from '@/lib/client';
 import Content from '@/shared/ui/Content';
 import PixelizedImg from '@/shared/ui/PixelizedImg';
 import Title from '@/shared/ui/Title';
+import { setCategories } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
 
 const Article = (props) => {
   const { children, className, post } = props;
-  const date = format(new Date(post.publishedDate), 'dd MMM yyyy, HH:mm');
+  const date = format(new Date(post.publishedDate), 'dd MMM yyyy', { locale: ruLocale });
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -24,7 +28,11 @@ const Article = (props) => {
       <article className={cl(className, styles.article)}>
         <Title className={styles.articleTitle}>{post.title}</Title>
         <div className={styles.articleInfo}>
-          <Link className={styles.articleCategory} href={`/${encodeURIComponent(post.categorySlug.current)}`}>
+          <Link
+            className={styles.articleCategory}
+            href={`/news?category=${post.categorySlug.current}`}
+            onClick={() => dispatch(setCategories(post.categorySlug.current))}
+          >
             {post.category}
           </Link>{' '}
           / {date}

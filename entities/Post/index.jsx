@@ -1,5 +1,6 @@
 import cl from 'classnames';
 import { format } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
 import Link from 'next/link';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -14,7 +15,7 @@ import styles from './index.module.scss';
 
 const Post = (props) => {
   const { className, title, category, categorySlug, publishedDate, image, slug, body } = props;
-  const date = format(new Date(publishedDate), 'dd MMM, yyyy');
+  const date = format(new Date(publishedDate), 'dd MMM yyyy', { locale: ruLocale });
 
   const dispatch = useDispatch();
 

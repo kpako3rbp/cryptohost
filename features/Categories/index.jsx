@@ -15,9 +15,6 @@ const Categories = (props) => {
   const dispatch = useDispatch();
   const currentCategories = useSelector((state) => state.postsData.categories);
 
-  // const initCategories = useSelector((state) => state.postsData.categories);
-  // const currentCategories = initCategory ? [initCategory] : initCategories;
-
   const [loading, setLoading] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(currentCategories);
 
@@ -27,8 +24,6 @@ const Categories = (props) => {
 
   const getPostsByCategories = async (newCategory) => {
     setLoading(true);
-
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
     const isAlreadySelected = selectedCategories.includes(newCategory); //
     const updatedCategories = isAlreadySelected
