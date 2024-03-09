@@ -56,9 +56,9 @@ const Home = (props) => {
         <Section>
           <Title color={'purple'}>Текущие новости</Title>
           <PostGrid>
-            <MainPost {...loadedPosts[0]} />
+            <MainPost {...loadedPosts[0]} directory={'news'} />
             {loadedPosts.slice(1).map((post) => (
-              <Post key={post.slug.current} {...post} />
+              <Post key={post.slug.current} {...post} directory={'news'} />
             ))}
             <ButtonLink href={'/news'}>Ко всем новостям →</ButtonLink>
           </PostGrid>

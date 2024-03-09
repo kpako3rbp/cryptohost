@@ -14,7 +14,7 @@ import { setCategories } from '@/slices/postsSlice';
 import styles from './index.module.scss';
 
 const Post = (props) => {
-  const { className, title, category, categorySlug, publishedDate, image, slug, body } = props;
+  const { className, title, category, categorySlug, publishedDate, image, slug, body, directory } = props;
   const date = format(new Date(publishedDate), 'dd MMM yyyy', { locale: ruLocale });
 
   const dispatch = useDispatch();
@@ -25,21 +25,26 @@ const Post = (props) => {
   return (
     title && (
       <div className={styles.post}>
-        <Link href={`news/${encodeURIComponent(slug.current)}`}>
+        <Link href={`/${directory}/${encodeURIComponent(slug.current)}`}>
           <PixelizedImg className={styles.postImg} src={urlFor(image).url()} alt={''} pixelScale={9}></PixelizedImg>
         </Link>
         <div className={styles.postInner}>
           <div className={styles.postInfo}>
-            <Link
-              className={styles.postCategory}
-              href={`/news?category=${categorySlug}`}
-              onClick={() => dispatch(setCategories(categorySlug))}
-            >
-              {category}
-            </Link>{' '}
-            / {date}
+            {category && (
+              <>
+                <Link
+                  className={styles.postCategory}
+                  href={`/${directory}?category=${categorySlug}`}
+                  onClick={() => dispatch(setCategories(categorySlug))}
+                >
+                  {category}
+                </Link>
+                {' / '}
+              </>
+            )}
+            {date}
           </div>
-          <Link href={`news/${encodeURIComponent(slug.current)}`}>
+          <Link href={`/${directory}/${encodeURIComponent(slug.current)}`}>
             <Title type={'small'} className={styles.postTitle}>
               {title}
             </Title>

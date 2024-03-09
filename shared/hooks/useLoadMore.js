@@ -1,34 +1,38 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import { addPosts } from '@/slices/postsSlice';
-
-const useLoadMore = async (route, params, action) => {
-  const [data, setData] = useState(null);
+const useMoreLoader = (initialLoadAmount, loadStep, loadPostsAPI) => {
+  const [posts, setPosts] = useState([]);
+  const [loadedAmount, setLoadedAmount] = useState(initialLoadAmount);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const loadMorePosts = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(loadPostsAPI, {
+        params: {
+          start: loadedAmount,
+          end: loadedAmount + loadStep,
+        },
+      });
+
+      setPosts([...posts, ...data]);
+      setLoadedAmount(loadedAmount + loadStep);
+    } catch (error) {
+      console.error('Error loading posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(route, { params });
-        setData(response.data);
-
-        setLoadedAmount(loadedAmount + LOAD_MORE_STEP);
-        action();
-      } catch (err) {
-        setError(err);
-        console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
-      } finally {
-        setLoading(false);
-      }
+    const loadInitialPosts = async () => {
+      await loadMorePosts();
     };
+    loadInitialPosts();
+  }, []);
 
-    fetchData();
-  }, [route, params]);
-
-  return { data, loading, error };
+  return { posts, loading, loadMorePosts };
 };
 
-export default useLoadMore;
+export default useMoreLoader;

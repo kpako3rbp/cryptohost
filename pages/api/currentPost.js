@@ -11,7 +11,7 @@ export default async function currentPost(req, res) {
 }
 
 async function fetchPostsPaths() {
-  const query = `*[type == "news"] {
+  const query = `*[type == "post"] {
     slug {
       current
     }

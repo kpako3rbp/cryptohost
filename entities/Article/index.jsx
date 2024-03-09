@@ -15,7 +15,7 @@ import { setCategories } from '@/slices/postsSlice';
 import styles from './index.module.scss';
 
 const Article = (props) => {
-  const { children, className, post } = props;
+  const { children, className, post, directory } = props;
   const date = format(new Date(post.publishedDate), 'dd MMM yyyy', { locale: ruLocale });
   const dispatch = useDispatch();
 
@@ -28,16 +28,21 @@ const Article = (props) => {
       <article className={cl(className, styles.article)}>
         <Title className={styles.articleTitle}>{post.title}</Title>
         <div className={styles.articleInfo}>
-          <Link
-            className={styles.articleCategory}
-            href={`/news?category=${post.categorySlug.current}`}
-            onClick={() => dispatch(setCategories(post.categorySlug.current))}
-          >
-            {post.category}
-          </Link>{' '}
-          / {date}
+          {post.category && (
+            <>
+              <Link
+                className={styles.articleCategory}
+                href={`/news?category=${post.categorySlug.current}`}
+                onClick={() => dispatch(setCategories(post.categorySlug.current))}
+              >
+                {post.category}
+              </Link>
+              {' / '}
+            </>
+          )}
+          {date}
         </div>
-        <Link href={`news/${encodeURIComponent(post.slug.current)}`}>
+        <Link href={`${directory}/${encodeURIComponent(post.slug.current)}`}>
           <PixelizedImg
             className={styles.articleImg}
             src={urlFor(post.image).url()}

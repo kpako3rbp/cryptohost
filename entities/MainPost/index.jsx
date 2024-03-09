@@ -15,7 +15,7 @@ import { setCategories } from '@/slices/postsSlice';
 import styles from './index.module.scss';
 
 const MainPost = (props) => {
-  const { className, index, title, category, categorySlug, publishedDate, image, slug, body } = props;
+  const { className, index, title, category, categorySlug, publishedDate, image, slug, body, directory } = props;
   const date = format(new Date(publishedDate), 'dd MMM yyyy', { locale: ruLocale });
 
   const dispatch = useDispatch();
@@ -45,22 +45,27 @@ const MainPost = (props) => {
   return (
     title && (
       <div className={styles.post}>
-        <Link href={`news/${encodeURIComponent(slug.current)}`}>
+        <Link href={`/${directory}/${encodeURIComponent(slug.current)}`}>
           <PixelizedImg className={styles.postImg} src={urlFor(image).url()} alt={''} pixelScale={12}></PixelizedImg>
         </Link>
         <div className={styles.postInner}>
           <div>
             <div className={styles.postInfo}>
-              <Link
-                className={styles.postCategory}
-                href={`/news?category=${categorySlug}`}
-                onClick={() => dispatch(setCategories(categorySlug))}
-              >
-                {category}
-              </Link>{' '}
-              / {date}
+              {category && (
+                <>
+                  <Link
+                    className={styles.postCategory}
+                    href={`/${directory}?category=${categorySlug}`}
+                    onClick={() => dispatch(setCategories(categorySlug))}
+                  >
+                    {category}
+                  </Link>
+                  {' / '}
+                </>
+              )}
+              {date}
             </div>
-            <Link href={`news/${encodeURIComponent(slug.current)}`}>
+            <Link href={`/${directory}/${encodeURIComponent(slug.current)}`}>
               <Title type={'small'} className={styles.postTitle}>
                 {title}
               </Title>
@@ -68,7 +73,7 @@ const MainPost = (props) => {
             <p className={styles.postText}>{description}</p>
           </div>
 
-          <ButtonLink className={styles.postButton} href={`news/${encodeURIComponent(slug.current)}`}>
+          <ButtonLink className={styles.postButton} href={`/${directory}/${encodeURIComponent(slug.current)}`}>
             Читать →
           </ButtonLink>
         </div>

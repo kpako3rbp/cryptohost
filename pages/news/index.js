@@ -97,10 +97,10 @@ const News = (props) => {
         </Section>
 
         <Section noTopPadding={true}>
-          <PostGrid className={styles.postGrid}>
-            <MainPost {...mainPost} />
+          <PostGrid className={styles.newsPostGrid}>
+            <MainPost {...mainPost} directory={'news'} />
             {posts.slice(1).map((post) => (
-              <Post key={post.slug.current} {...post} />
+              <Post key={post.slug.current} {...post} directory={'news'} />
             ))}
 
             {isLoadButton && (

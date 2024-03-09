@@ -10,7 +10,7 @@ const textEditorStyles = [
 ]
 
 export default {
-  name: 'activities',
+  name: 'activity',
   type: 'document',
   title: '🎁 Криптоактивности',
   groups: [

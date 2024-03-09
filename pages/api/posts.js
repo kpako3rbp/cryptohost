@@ -18,16 +18,21 @@ export default async function posts(req, res) {
   });
 }
 
-export async function loadPosts(start, end, categories = '') {
+export async function loadPosts(start, end, categories = '', excludingPostSlug = undefined) {
   let categoryQuery = '';
+  let exclusionQuery = '';
 
   if (categories && JSON.parse(categories).length > 0) {
     const categoryFilters = JSON.parse(categories).map((category) => `category->slug.current == '${category}'`);
     categoryQuery = ` && (${categoryFilters.join(' || ')})`;
   }
 
+  if (excludingPostSlug) {
+    exclusionQuery = ` && slug.current != '${excludingPostSlug}'`;
+  }
+
   const query = `{
-    "posts": *[_type == "post"${categoryQuery}] | order(publishedDate desc) [${start}...${end}] {
+    "posts": *[_type == "post"${categoryQuery}${exclusionQuery}] | order(publishedDate desc) [${start}...${end}] {
       _id,
       title,
       'category': category->name,
@@ -38,7 +43,7 @@ export async function loadPosts(start, end, categories = '') {
       body,
       _type
     },
-    "total": count(*[_type == "post"${categoryQuery}])
+    "total": count(*[_type == "post"${categoryQuery}${exclusionQuery}])
   }`;
 
   console.log(query);
