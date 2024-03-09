@@ -14,7 +14,7 @@ import { setCategories } from '@/slices/postsSlice';
 import styles from './index.module.scss';
 
 const Post = (props) => {
-  const { className, title, category, categorySlug, publishedDate, image, slug, body, directory } = props;
+  const { className, title, category, categorySlug, publishedDate, image, slug, body, directory = 'news' } = props;
   const date = format(new Date(publishedDate), 'dd MMM yyyy', { locale: ruLocale });
 
   const dispatch = useDispatch();

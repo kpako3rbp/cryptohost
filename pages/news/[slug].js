@@ -36,7 +36,7 @@ const CurrentPost = (props) => {
         <Title color={'purple'}>Может быть интересно</Title>
         <PostGrid hasMainPost={false}>
           {sameCategoryPosts.map((p) => (
-            <Post key={p.slug.current} {...p} />
+            <Post key={p.slug.current} {...p} directory={'news'} />
           ))}
         </PostGrid>
         <ButtonLink href={'/news'} className={styles.currentPostMoreBtn}>
