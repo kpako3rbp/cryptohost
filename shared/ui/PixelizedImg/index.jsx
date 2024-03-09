@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Pixelit from '@/shared/lib/pixelit';
+import Card from '@/shared/ui/Card';
 
 import styles from './index.module.scss';
 
@@ -33,10 +34,10 @@ const PixelizedImage = (props) => {
   };
 
   return (
-    <div className={cl(styles.image, className)}>
+    <Card className={cl(styles.image, className)}>
       <img ref={imageRef} src={src} alt={alt} onLoad={() => pixelizeImg(imageRef.current)} />
       <canvas ref={canvasRef}></canvas>
-    </div>
+    </Card>
   );
 };
 

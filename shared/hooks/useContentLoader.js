@@ -40,25 +40,9 @@ const useContentLoader = (entityName, loadMoreStep, additionalParams = {}) => {
         },
       });
 
-      /*      console.log({
-        start: loadedAmount,
-        end: loadedAmount + loadMoreStep,
-        ...additionalParams,
-      })*/
-
-      // setLoadedAmount(loadedAmount + loadMoreStep);
-
-      console.log('newData', newData)
-
-      // console.log('loadedAmount!!!!!!!!!!!!!!!!!!!!!', loadedAmount)
       dispatch(reducers[entityName].setLoadedCount(loadedAmount + newData[entityName].length));
       setLoadedAmount(loadedAmount + newData[entityName].length);
-
-      // console.log('loadedAmount', loadedAmount, loadedAmount + newData.posts.length);
-
-      // console.log(newData, 'newDatanewData');
-
-      dispatch(reducers[entityName].addEntities(newData)); // Будем делать это на странице
+      dispatch(reducers[entityName].addEntities(newData));
     } catch (err) {
       console.error(err);
     } finally {

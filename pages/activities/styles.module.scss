@@ -3,3 +3,19 @@
     padding-top: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .activities {
+    &Title {
+      font-size: 6.5vw;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .activities {
+    &Title {
+      font-size: 7.5vw;
+    }
+  }
+}

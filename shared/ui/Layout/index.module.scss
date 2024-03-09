@@ -50,4 +50,30 @@
 
     --border-black: 2px solid var(--black-color);
   }
+
+  &LigthTheme {
+    --background-color: #efe9db;
+    --overlay-color: rgba(108, 106, 102, 0.92);
+    --black-color: #414042;
+    --green-color: #85e17e;
+    --blue-color: #82c0d5;
+    --gray-color: #ddd8cc;
+    --gray-med-color: #c7c3b8;
+    --purple-color: #5f3bc2;
+    --white-color: #ffffff;
+    --text-color-gray: #7b7583;
+    --text-color-dark: #3b3347;
+    --text-color-medium: #7b7583;
+    --green-color2: #3c9336;
+    --pink-color: #ed0265;
+
+    --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
+    --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
+
+    --box-shadow-sm: 3px 3px 0px 0px var(--black-color);
+    --box-shadow-sm-hover: 1px 1px 0px 0px var(--black-color);
+    --border-black: 2px solid var(--black-color);
+
+    --border-gray: 2px solid var(--gray-color);
+  }
 }

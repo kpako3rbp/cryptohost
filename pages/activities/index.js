@@ -50,7 +50,7 @@ const Activities = (props) => {
       <Layout>
         <Breadcrumbs paths={paths}></Breadcrumbs>
         <Section noTopPadding={true}>
-          <Title color={'purple'}>Криптоактивности</Title>
+          <Title color={'purple'} className={styles.activitiesTitle}>Криптоактивности</Title>
           <PageDescriptor>
             Хотите бесплатно мем-койнов? Быть в контексте и следить за инфополем, особенно в крипте это важно. Но в
             двойне полезнее, если можно при этом не много заработать. Каждую неделю рандомно мы разыгрываем мем-коины.

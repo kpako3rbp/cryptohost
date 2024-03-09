@@ -27,6 +27,7 @@ const Layout = (props) => {
   const layoutClassNames = cl(styles.layout, {
     [styles.layoutFixed]: isModalOpen,
     [styles.layoutDarkTheme]: theme === 'dark',
+    [styles.layoutLigthTheme]: theme === 'light',
   });
 
   const headerClassNames = cl({

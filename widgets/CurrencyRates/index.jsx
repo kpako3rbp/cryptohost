@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 
 import { getCurrencyRates } from '@/pages/api/currencyRates';
+import Card from '@/shared/ui/Card';
 import CurrencyRateItem from '@/shared/ui/CurrencyRateItem';
-import GriddedCard from '@/shared/ui/GriddedCard';
-import Section from '@/shared/ui/Section';
 import { updateRates, updateResponseTime } from '@/slices/currencyRatesSlice';
 
 import styles from './index.module.scss';
@@ -34,7 +33,7 @@ const CurrencyRates = (props) => {
         dispatch(updateRates(data));
         setLoading(false);
       } catch (err) {
-        console.log('ERRROROROROOROROROORORO');
+        console.log('Ошибка при загрузке валют');
         setLoading(false);
         setError(true);
       }
@@ -71,23 +70,23 @@ const CurrencyRates = (props) => {
         {rates ? updateTime.minutes : '—'}
       </h3>
       {loading && !error && (
-        <GriddedCard className={styles.ratesCard}>
+        <Card isGridded={true} className={styles.ratesCard}>
           <div className={styles.ratesMessage}>Загрузка...</div>
-        </GriddedCard>
+        </Card>
       )}
       {!loading && error && (
-        <GriddedCard className={styles.ratesCard}>
+        <Card isGridded={true} className={styles.ratesCard}>
           <div className={styles.ratesMessage}>Данные не загружены, что-то пошло не так</div>
-        </GriddedCard>
+        </Card>
       )}
       {!loading && !error && (
-        <GriddedCard className={styles.ratesCard}>
+        <Card isGridded={true} className={styles.ratesCard}>
           <Slider {...sliderSettings}>
             {rates.map((rate) => (
               <CurrencyRateItem data={rate} key={rate.shortName} />
             ))}
           </Slider>
-        </GriddedCard>
+        </Card>
       )}
     </div>
   );
