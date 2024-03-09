@@ -1,7 +1,5 @@
 import axios from 'axios';
 import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,13 +7,14 @@ import MainPost from '@/entities/MainPost';
 import Post from '@/entities/Post';
 import Breadcrumbs from '@/features/Breadcrumbs';
 import { loadActivities } from '@/pages/api/activities';
+import useContentLoader from '@/shared/hooks/useContentLoader';
 import Button from '@/shared/ui/Button';
 import Layout from '@/shared/ui/Layout';
 import PageDescriptor from '@/shared/ui/PageDescriptor';
 import PostGrid from '@/shared/ui/PostGrid';
 import Section from '@/shared/ui/Section';
 import Title from '@/shared/ui/Title';
-import { addActivities, setActivities } from '@/slices/activitiesSlice';
+import { setActivities, setLoadedCount } from '@/slices/activitiesSlice';
 import Subscribe from '@/widgets/Subscribe';
 
 import styles from './styles.module.scss';
@@ -23,48 +22,25 @@ import styles from './styles.module.scss';
 const LOAD_MORE_STEP = 6;
 
 const Activities = (props) => {
-  const { initialActivities, total } = props;
-  const dispatch = useDispatch();
-
-  // console.log('initCategory', initCategory);
-
-  useEffect(() => {
-    dispatch(setActivities({ activities: initialActivities, total }));
-  }, [dispatch, initialActivities]);
-
   const paths = [
     { name: 'Главная', url: '/' },
     { name: 'Криптоактивности', url: '/activities' },
   ];
 
-  const { activities, total: totalActivities } = useSelector((state) => state.activitiesData);
+  const { initialActivities, total } = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setActivities({ activities: initialActivities, total }));
+    dispatch(setLoadedCount(LOAD_MORE_STEP + 1));
+  }, [dispatch, initialActivities]);
+
+  const { activities, total: totalActivities, loaded } = useSelector((state) => state.activitiesData);
   const mainActivity = activities[0] || initialActivities[0];
 
-  const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP + 1); // Потому что еще главный пост
-  const [loading, setLoading] = useState(false);
+  const { loading, loadData } = useContentLoader('activities', LOAD_MORE_STEP);
 
-  const isLoadButton = totalActivities > loadedAmount;
-
-  const getMoreActivities = async () => {
-    setLoading(true);
-    try {
-      // Меняется роут
-      const { data } = await axios.get('/api/activities', {
-        params: {
-          start: loadedAmount,
-          end: loadedAmount + LOAD_MORE_STEP,
-          // меняются параметры categories: JSON.stringify(currentCategories),
-        },
-      });
-
-      setLoadedAmount(loadedAmount + LOAD_MORE_STEP); // !Зависит от конкретного состояния (само состояние, функция для установки)
-      dispatch(addActivities(data)); // меняется действие
-    } catch (err) {
-      console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
-    } finally {
-      setLoading(false); // нужна функция для установки состояния
-    }
-  };
+  const isLoadButton = totalActivities > loaded;
 
   return (
     <>
@@ -89,7 +65,7 @@ const Activities = (props) => {
             ))}
 
             {isLoadButton && (
-              <Button onClick={getMoreActivities} disabled={loading}>
+              <Button onClick={loadData} disabled={loading}>
                 Загрузить еще ↓
               </Button>
             )}

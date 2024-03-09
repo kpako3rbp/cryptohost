@@ -1,8 +1,7 @@
-import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MainPost from '@/entities/MainPost';
@@ -11,13 +10,14 @@ import Breadcrumbs from '@/features/Breadcrumbs';
 import Categories from '@/features/Categories';
 import { loadCategories } from '@/pages/api/categories';
 import { loadPosts } from '@/pages/api/posts';
+import useContentLoader from '@/shared/hooks/useContentLoader';
 import Button from '@/shared/ui/Button';
 import Layout from '@/shared/ui/Layout';
 import PageDescriptor from '@/shared/ui/PageDescriptor';
 import PostGrid from '@/shared/ui/PostGrid';
 import Section from '@/shared/ui/Section';
 import Title from '@/shared/ui/Title';
-import { addPosts, setCategories, setPosts } from '@/slices/postsSlice';
+import { setCategories, setLoadedCount, setPosts } from '@/slices/postsSlice';
 import Subscribe from '@/widgets/Subscribe';
 
 import styles from './styles.module.scss';
@@ -25,56 +25,32 @@ import styles from './styles.module.scss';
 const LOAD_MORE_STEP = 6;
 
 const News = (props) => {
-  const { initialPosts, total, categoriesList, currentPostsCategories } = props;
-  const dispatch = useDispatch();
-
-  // console.log('initialPosts999999999', initialPosts)
-
-  const router = useRouter();
-  const { category } = router.query;
-  const initCategory = category || [];
-
-  // console.log('initCategory', initCategory);
-
-  useEffect(() => {
-    dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
-    dispatch(setCategories(initCategory));
-  }, [dispatch, initialPosts]);
-
   const paths = [
     { name: 'Главная', url: '/' },
     { name: 'Новости', url: '/news' },
   ];
 
-  const { posts, categories: currentCategories, total: totalPosts } = useSelector((state) => state.postsData);
+  const { initialPosts, total, categoriesList, currentPostsCategories } = props;
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+  const { category } = router.query;
+  const initCategory = category || [];
+
+  useEffect(() => {
+    dispatch(setPosts({ posts: initialPosts, total, categories: currentPostsCategories }));
+    dispatch(setCategories(initCategory));
+    dispatch(setLoadedCount(LOAD_MORE_STEP + 1));
+  }, [dispatch, initialPosts]);
+
+  const { posts, categories: currentCategories, total: totalPosts, loaded } = useSelector((state) => state.postsData);
   const mainPost = posts[0] || initialPosts[0];
 
-  const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP + 1); // Потому что еще главный пост
-  const [loading, setLoading] = useState(false);
+  const { loading, loadData } = useContentLoader('posts', LOAD_MORE_STEP, {
+    categories: JSON.stringify(currentCategories),
+  });
 
-  const isLoadButton = totalPosts > loadedAmount;
-
-  const getMorePosts = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get('/api/posts', {
-        params: {
-          start: loadedAmount,
-          end: loadedAmount + LOAD_MORE_STEP,
-          categories: JSON.stringify(currentCategories),
-        },
-      });
-
-      setLoadedAmount(loadedAmount + LOAD_MORE_STEP);
-      dispatch(addPosts(data));
-    } catch (err) {
-      console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // TODO вместо Link на категориях попробовать сделать функцию, которая будет включать нужную категорию. То есть перенести getPostsByCategories сюда
+  const isLoadButton = totalPosts > loaded;
 
   return (
     <>
@@ -104,7 +80,7 @@ const News = (props) => {
             ))}
 
             {isLoadButton && (
-              <Button onClick={getMorePosts} disabled={loading}>
+              <Button onClick={loadData} disabled={loading}>
                 Загрузить еще ↓
               </Button>
             )}

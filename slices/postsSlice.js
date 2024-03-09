@@ -6,6 +6,7 @@ const postsSlice = createSlice({
     posts: [],
     categories: [],
     total: 0,
+    loaded: 0,
   },
   reducers: {
     setPosts: (state, action) => {
@@ -23,6 +24,9 @@ const postsSlice = createSlice({
         state.categories = [...state.categories, action.payload];
       }
     },
+    setLoadedCount: (state, action) => {
+      state.loaded = action.payload;
+    },
     removeCategory: (state, action) => {
       state.categories = state.categories.filter((category) => category !== action.payload);
     },
@@ -32,5 +36,5 @@ const postsSlice = createSlice({
   },
 });
 
-export const { setPosts, addPosts, addCategory, setCategories, removeCategory } = postsSlice.actions;
+export const { setPosts, addPosts, addCategory, setCategories, removeCategory, setLoadedCount } = postsSlice.actions;
 export default postsSlice.reducer;

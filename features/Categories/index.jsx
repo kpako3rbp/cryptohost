@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@/shared/ui/Button';
-import { addCategory, setCategories, setPosts } from '@/slices/postsSlice';
+import { addCategory, setCategories, setLoadedCount, setPosts } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
 
@@ -13,13 +13,14 @@ const POSTS_TO_LOAD = 7;
 const Categories = (props) => {
   const { className, categories } = props;
   const dispatch = useDispatch();
-  const currentCategories = useSelector((state) => state.postsData.categories);
+  const { posts, categories: currentCategories } = useSelector((state) => state.postsData);
 
   const [loading, setLoading] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(currentCategories);
 
   useEffect(() => {
     setSelectedCategories(currentCategories);
+    dispatch(setLoadedCount(posts.length));
   }, [currentCategories]);
 
   const getPostsByCategories = async (newCategory) => {
