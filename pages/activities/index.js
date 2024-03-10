@@ -52,6 +52,7 @@ const Activities = (props) => {
       <Head>
         <title>Криптоактивности</title>
         <meta name="description" content="Crypto-host - все, что нужно знать о блокчейн и криптовалютах простыми словами. Обучающие статьи для новичков, свежие новости, обзоры проектов и другое!" />
+        <meta name="image" content="/logo.png" />
       </Head>
       <Layout>
         <Breadcrumbs paths={paths}></Breadcrumbs>

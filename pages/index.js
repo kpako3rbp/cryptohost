@@ -16,6 +16,7 @@ import { setPromoBanner } from '@/slices/promoBannerSlice';
 import CurrencyRates from '@/widgets/CurrencyRates';
 import Promo from '@/widgets/Promo';
 import Subscribe from '@/widgets/Subscribe';
+import {urlFor} from "@/lib/client";
 
 const POSTS_TO_SHOW = 6;
 
@@ -37,6 +38,7 @@ const Home = (props) => {
       <Head>
         <title>Cryptohost</title>
         <meta name="description" content="Crypto-host - все, что нужно знать о блокчейн и криптовалютах простыми словами. Обучающие статьи для новичков, свежие новости, обзоры проектов и другое!" />
+        <meta name="image" content="/logo.png" />
       </Head>
       <Layout isHomePage={true}>
         <Section>
