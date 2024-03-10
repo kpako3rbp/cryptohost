@@ -36,12 +36,7 @@ const Home = (props) => {
     <>
       <Head>
         <title>Cryptohost</title>
-        <meta name="description" content="Крипто-блокчейн медиа" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
-        />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Crypto-host - все, что нужно знать о блокчейн и криптовалютах простыми словами. Обучающие статьи для новичков, свежие новости, обзоры проектов и другое!" />
       </Head>
       <Layout isHomePage={true}>
         <Section>

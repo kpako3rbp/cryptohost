@@ -7,6 +7,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { urlFor } from '@/lib/client';
+import { extractPostDescription } from '@/shared/lib/postHelpers';
 import Content from '@/shared/ui/Content';
 import PixelizedImg from '@/shared/ui/PixelizedImg';
 import Title from '@/shared/ui/Title';
@@ -19,10 +20,14 @@ const Article = (props) => {
   const date = format(new Date(post.publishedDate), 'dd MMM yyyy', { locale: ruLocale });
   const dispatch = useDispatch();
 
+  const description = extractPostDescription(post.body, 200);
+
   return (
     <>
       <Head>
         <title>{post.meta_title}</title>
+        <meta name="description" content={`${description}`} />
+        <meta name="image" content={`${urlFor(post.image).url()}`} />
       </Head>
 
       <article className={cl(className, styles.article)}>
