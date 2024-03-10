@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { showNotification } from '@/shared/lib/userNotifications';
 import Button from '@/shared/ui/Button';
+import Preloader from '@/shared/ui/Preloader';
 import { addCategory, setLoadedCount, setPosts } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
@@ -73,6 +74,7 @@ const Categories = (props) => {
           </Button>
         );
       })}
+      {loading && <Preloader isGLobal={true} />}
     </div>
   );
 };
