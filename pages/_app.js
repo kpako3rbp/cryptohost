@@ -2,6 +2,7 @@ import '@/styles/reset.scss';
 import '@/styles/globals.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -31,7 +32,7 @@ const App = (props) => {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
-      {loading && <Preloader />}
+      {loading && <Preloader isGlobal={true} />}
     </Provider>
   );
 };

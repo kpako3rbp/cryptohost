@@ -66,7 +66,6 @@ export async function getCurrencyRates() {
     );
     return formatCurrencyRates(data);
   } catch (error) {
-    console.error('Error fetching crypto prices:', error);
     throw new Error('Error fetching crypto prices');
   }
 }

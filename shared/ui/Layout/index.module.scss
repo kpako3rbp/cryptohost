@@ -41,6 +41,7 @@
     --text-color-medium: #cbc6ba;
     --green-color2: #70c272;
     --pink-color: #ed0265;
+    --red-color: #ec2e1a;
 
     --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
     --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
@@ -51,7 +52,7 @@
     --border-black: 2px solid var(--black-color);
   }
 
-  &LigthTheme {
+  &LightTheme {
     --background-color: #efe9db;
     --overlay-color: rgba(108, 106, 102, 0.92);
     --black-color: #414042;
@@ -66,6 +67,7 @@
     --text-color-medium: #7b7583;
     --green-color2: #3c9336;
     --pink-color: #ed0265;
+    --red-color: #ff9186;
 
     --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
     --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
@@ -77,3 +79,5 @@
     --border-gray: 2px solid var(--gray-color);
   }
 }
+
+

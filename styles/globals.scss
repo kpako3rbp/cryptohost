@@ -49,6 +49,7 @@
   --text-color-medium: #7b7583;
   --green-color2: #3c9336;
   --pink-color: #ed0265;
+  --red-color: #ff9186;
 
   --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
   --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
@@ -75,6 +76,7 @@
     --text-color-medium: #cbc6ba;
     --green-color2: #70c272;
     --pink-color: #ed0265;
+    --red-color: #ec2e1a;
 
     --box-shadow-xsm: 2px 2px 0px 0px var(--black-color);
     --box-shadow-xsm-hover: 1px 1px 0px 0px var(--black-color);
@@ -143,4 +145,23 @@ a {
     --fz-18: 15px;
     --fz-30: 28px;
   }
+}
+
+// Overriding toastify styles
+
+
+
+.Toastify__toast {
+  border-radius: var(--br-small) !important;
+  border: var(--border-black);
+  box-shadow: var(--box-shadow-sm) !important;
+
+  --toastify-color-success: var(--green-color);
+  --toastify-color-error: var(--red-color);
+}
+
+.Toastify__toast-body {
+  font-family: 'Monocraft', sans-serif;
+  color: var(--black-color);
+  font-size: 15px;
 }

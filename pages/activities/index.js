@@ -14,7 +14,7 @@ import PageDescriptor from '@/shared/ui/PageDescriptor';
 import PostGrid from '@/shared/ui/PostGrid';
 import Section from '@/shared/ui/Section';
 import Title from '@/shared/ui/Title';
-import { setActivities, setLoadedCount } from '@/slices/activitiesSlice';
+import { addActivities, setActivities, setLoadedCount } from '@/slices/activitiesSlice';
 import Subscribe from '@/widgets/Subscribe';
 
 import styles from './styles.module.scss';
@@ -38,7 +38,12 @@ const Activities = (props) => {
   const { activities, total: totalActivities, loaded } = useSelector((state) => state.activitiesData);
   const mainActivity = activities[0] || initialActivities[0];
 
-  const { loading, loadData } = useContentLoader('activities', LOAD_MORE_STEP);
+  const { loading, loadData } = useContentLoader(
+    'activities',
+    LOAD_MORE_STEP,
+    (count) => dispatch(setLoadedCount(count)),
+    (entities) => dispatch(addActivities(entities)),
+  );
 
   const isLoadButton = totalActivities > loaded;
 
@@ -50,7 +55,9 @@ const Activities = (props) => {
       <Layout>
         <Breadcrumbs paths={paths}></Breadcrumbs>
         <Section noTopPadding={true}>
-          <Title color={'purple'} className={styles.activitiesTitle}>Криптоактивности</Title>
+          <Title color={'purple'} className={styles.activitiesTitle}>
+            Криптоактивности
+          </Title>
           <PageDescriptor>
             Хотите бесплатно мем-койнов? Быть в контексте и следить за инфополем, особенно в крипте это важно. Но в
             двойне полезнее, если можно при этом не много заработать. Каждую неделю рандомно мы разыгрываем мем-коины.

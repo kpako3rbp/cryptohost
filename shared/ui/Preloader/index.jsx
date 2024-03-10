@@ -6,12 +6,16 @@ import Card from '@/shared/ui/Card';
 import styles from './index.module.scss';
 
 const Preloader = (props) => {
-  const { children, className } = props;
+  const { className, isGlobal = true } = props;
+
+  const preloaderClassNames = cl(className, {
+    [styles.preloaderGlobal]: isGlobal,
+    [styles.preloaderStandalone]: !isGlobal,
+  });
 
   return (
-    <Card className={cl(className, styles.preloaderWrapper)}>
+    <Card className={preloaderClassNames}>
       <div className={styles.preloader}></div>
-      {/*<p className={styles.preloaderText}>Загрузка...</p>*/}
     </Card>
   );
 };

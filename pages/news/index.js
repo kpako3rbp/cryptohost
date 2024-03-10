@@ -17,7 +17,7 @@ import PageDescriptor from '@/shared/ui/PageDescriptor';
 import PostGrid from '@/shared/ui/PostGrid';
 import Section from '@/shared/ui/Section';
 import Title from '@/shared/ui/Title';
-import { setCategories, setLoadedCount, setPosts } from '@/slices/postsSlice';
+import { addPosts, setCategories, setLoadedCount, setPosts } from '@/slices/postsSlice';
 import Subscribe from '@/widgets/Subscribe';
 
 import styles from './styles.module.scss';
@@ -46,9 +46,13 @@ const News = (props) => {
   const { posts, categories: currentCategories, total: totalPosts, loaded } = useSelector((state) => state.postsData);
   const mainPost = posts[0] || initialPosts[0];
 
-  const { loading, loadData } = useContentLoader('posts', LOAD_MORE_STEP, {
-    categories: JSON.stringify(currentCategories),
-  });
+  const { loading, loadData } = useContentLoader(
+    'posts',
+    LOAD_MORE_STEP,
+    (count) => dispatch(setLoadedCount(count)),
+    (entities) => dispatch(addPosts(entities)),
+    { categories: JSON.stringify(currentCategories) },
+  );
 
   const isLoadButton = totalPosts > loaded;
 

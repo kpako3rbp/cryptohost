@@ -3,8 +3,9 @@ import cl from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { showNotification } from '@/shared/lib/userNotifications';
 import Button from '@/shared/ui/Button';
-import { addCategory, setCategories, setLoadedCount, setPosts } from '@/slices/postsSlice';
+import { addCategory, setLoadedCount, setPosts } from '@/slices/postsSlice';
 
 import styles from './index.module.scss';
 
@@ -44,7 +45,7 @@ const Categories = (props) => {
       setSelectedCategories(updatedCategories);
       dispatch(addCategory(newCategory));
     } catch (err) {
-      console.error(err); // TODO: добавить всплывающие подсказки для ошибок и прочего
+      showNotification('error', '😩 Что-то пошло не так, попробуйте еще раз');
     } finally {
       setLoading(false);
     }

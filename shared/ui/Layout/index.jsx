@@ -1,6 +1,7 @@
 import cl from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import ThemeToggler from '@/features/ThemeToggler';
 import { setTheme } from '@/slices/themeSlice';
@@ -27,7 +28,7 @@ const Layout = (props) => {
   const layoutClassNames = cl(styles.layout, {
     [styles.layoutFixed]: isModalOpen,
     [styles.layoutDarkTheme]: theme === 'dark',
-    [styles.layoutLigthTheme]: theme === 'light',
+    [styles.layoutLightTheme]: theme === 'light',
   });
 
   const headerClassNames = cl({
@@ -42,6 +43,7 @@ const Layout = (props) => {
       <Footer />
 
       <ThemeToggler />
+      <ToastContainer/>
     </div>
   );
 };

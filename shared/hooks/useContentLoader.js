@@ -1,25 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { addActivities, setLoadedCount as setLoadedActivities } from '@/slices/activitiesSlice';
-import { addPosts, setLoadedCount as setLoadedPosts } from '@/slices/postsSlice';
+import { showNotification } from '@/shared/lib/userNotifications';
 
-const useContentLoader = (entityName, loadMoreStep, additionalParams = {}) => {
-  const reducers = {
-    posts: {
-      api: '/api/posts',
-      addEntities: addPosts,
-      setLoadedCount: setLoadedPosts,
-    },
-    activities: {
-      api: '/api/activities',
-      addEntities: addActivities,
-      setLoadedCount: setLoadedActivities,
-    },
-  };
-
-  const dispatch = useDispatch();
+const useContentLoader = (entityName, loadMoreStep, setLoadedCount, addEntities, additionalParams = {}) => {
   const { loaded } = useSelector((state) => state[`${entityName}Data`]);
 
   const [loadedAmount, setLoadedAmount] = useState(loaded);
@@ -32,7 +17,7 @@ const useContentLoader = (entityName, loadMoreStep, additionalParams = {}) => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const { data: newData } = await axios.get(reducers[entityName].api, {
+      const { data: newData } = await axios.get(`/api/${entityName}`, {
         params: {
           start: loadedAmount,
           end: loadedAmount + loadMoreStep,
@@ -40,11 +25,11 @@ const useContentLoader = (entityName, loadMoreStep, additionalParams = {}) => {
         },
       });
 
-      dispatch(reducers[entityName].setLoadedCount(loadedAmount + newData[entityName].length));
       setLoadedAmount(loadedAmount + newData[entityName].length);
-      dispatch(reducers[entityName].addEntities(newData));
+      setLoadedCount(loadedAmount + newData[entityName].length);
+      addEntities(newData);
     } catch (err) {
-      console.error(err);
+      showNotification('error', '😩 Что-то пошло не так, попробуйте еще раз');
     } finally {
       setLoading(false);
     }
