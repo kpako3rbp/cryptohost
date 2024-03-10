@@ -17,7 +17,7 @@ const NotFoundBlock = (props) => {
 
   return (
     <div className={styles.notFound}>
-      <PixelizedImg className={styles.notFoundImg} src={'/404.jpg'} alt={''} pixelScale={20}></PixelizedImg>
+      <PixelizedImg className={styles.notFoundImg} src={'/404.jpg'} alt={''} pixelScale={12}></PixelizedImg>
       <div className={styles.notFoundInner}>
         <Title color={'purple'}>404!</Title>
         <p className={styles.notFoundText}>

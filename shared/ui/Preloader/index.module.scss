@@ -1,0 +1,59 @@
+.preloader {
+  width: 120px;
+  height: 8px;
+  -webkit-mask: linear-gradient(90deg, var(--green-color2) 70%, #0000 0) left/20% 100%;
+  background: linear-gradient(var(--green-color2) 0 0) left/0% 100% no-repeat var(--gray-med-color);
+  animation: progress-422c3u 2s infinite steps(6);
+
+  &Text {
+    font-size: 10px;
+  }
+
+  &Wrapper {
+    position: fixed;
+    bottom: 20px;
+    // left: 50%;
+    // transform: translateX(-50%);
+    right: 20px;
+    border-radius: var(--br-small);
+    box-shadow: var(--box-shadow-xsm);
+    padding: 6px 0px 6px 6px;
+
+    // display: flex;
+
+    z-index: 10;
+  }
+
+  @keyframes progress-422c3u {
+    100% {
+      background-size: 120% 100%;
+    }
+  }
+}
+
+/*
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1020px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: 780px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+*/

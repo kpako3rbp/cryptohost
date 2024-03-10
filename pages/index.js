@@ -17,13 +17,10 @@ import CurrencyRates from '@/widgets/CurrencyRates';
 import Promo from '@/widgets/Promo';
 import Subscribe from '@/widgets/Subscribe';
 
-const LOAD_MORE_STEP = 6;
+const POSTS_TO_SHOW = 6;
 
 const Home = (props) => {
   const { promoBanner, initialPosts, total } = props;
-  const [loadedPosts, setLoadedPosts] = useState(initialPosts);
-  const [loadedAmount, setLoadedAmount] = useState(LOAD_MORE_STEP);
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -56,8 +53,8 @@ const Home = (props) => {
         <Section>
           <Title color={'purple'}>Текущие новости</Title>
           <PostGrid>
-            <MainPost {...loadedPosts[0]} directory={'news'} />
-            {loadedPosts.slice(1).map((post) => (
+            <MainPost {...initialPosts[0]} directory={'news'} />
+            {initialPosts.slice(1).map((post) => (
               <Post key={post.slug.current} {...post} directory={'news'} />
             ))}
             <ButtonLink href={'/news'}>Ко всем новостям →</ButtonLink>
@@ -73,7 +70,7 @@ const Home = (props) => {
 
 export const getServerSideProps = async () => {
   const { loadedPromoBanner } = await loadPromoBanner();
-  const { loadedPosts, total } = await loadPosts(0, LOAD_MORE_STEP + 1); // на один пост больше, потому что еще есть главный пост
+  const { loadedPosts, total } = await loadPosts(0, POSTS_TO_SHOW + 1); // на один пост больше, потому что еще есть главный пост
   return {
     props: {
       promoBanner: loadedPromoBanner,
